@@ -3,7 +3,9 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 enum e_token_type
 {
 	SINGLE_QUOTE, // '
