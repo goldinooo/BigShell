@@ -34,3 +34,4 @@ int main(int ac, char **av)
 		script_mode(STDIN_FILENO/*Takes the shell struct*/);
 	return (0);
 }
+

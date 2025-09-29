@@ -1,8 +1,21 @@
 
 #ifndef MINISHELL_H
-# define MINISHELL_H
+#define MINISHELL_H
 
-#include <unistd.h>
-#include <stdbool.h>
-#include "utils.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <signal.h>
+# include <stdbool.h>
+# include <unistd.h>
+// # include <readline/readline.h>
+// # include <readline/history.h>
+
+
+
+typedef struct s_shell
+{
+	
+}	t_shell;
+
 #endif
