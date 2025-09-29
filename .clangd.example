@@ -1,0 +1,2 @@
+CompileFlags:
+	Add: [-Wall, -Wextra, -Werror, -I/home/bl4ckr0s33/Desktop/BigShell/include]

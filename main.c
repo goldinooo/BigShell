@@ -1,25 +1,36 @@
 #include "minishell.h"
 
-int main(int ac, char **av/*, char **env*/)
-{
-	// t_env	*list;
-	t_token	*tokens;
-	t_cmd 	*cmd;
-	char	*args;
 
-	tokens = NULL;
-	cmd = NULL;
-	// if (ac != 1 || init_env(env, &list) < 0)
-	// 	return (0);
-	(void)ac;
-	(void)av;
-	while (1337)
+void	process_line(char *line/*Takes the shell struct*/)
+{
+	// TODO:
+}
+
+void	interactive_mode(/*Takes the shell struct*/)
+{
+
+}
+
+void	script_mode(int fd/*Takes the shell struct*/)
+{
+	char	*line;
+
+	while (true)
 	{
-		args = readline("bigshell -->  ");
-		if (!args)
-			return 0;
-		add_history(args);
-		free(args);
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		// TODO: process line
 	}
-	return 0;
+}
+
+int main(int ac, char **av)
+{
+	// init & process the envs
+
+	if (isatty(STDIN_FILENO))
+		interactive_mode(/*Takes the shell struct*/);
+	else
+		script_mode(STDIN_FILENO/*Takes the shell struct*/);
+	return (0);
 }

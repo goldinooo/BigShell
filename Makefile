@@ -1,12 +1,12 @@
+NAME = Minishell
 CC = cc
 LIBS = -lreadline
 SRCS = src/utils/str_man.c src/utils/signals.c src/utils/env.c src/utils/env_utils.c \
 		main.c \
-		
+
 HEADER = minishell.h
-FLAGS = -Wall -Wextra -Werror -g 
+FLAGS = -Wall -Wextra -Werror -g
 OBJS = $(SRCS:.c=.o)
-NAME = Minishell
 
 
 all: banner $(NAME) finish
