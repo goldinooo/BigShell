@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+
 // prototypes str_man1.c
 
 int	ft_atoi(const char *str);

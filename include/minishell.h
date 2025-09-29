@@ -1,3 +1,4 @@
+
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
@@ -16,6 +17,5 @@ typedef struct s_shell
 {
 	
 }	t_shell;
-
 
 #endif

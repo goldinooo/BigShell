@@ -1,2 +1,5 @@
 .vscode
 .clangd
+*.o
+build
+Minishell
