@@ -66,6 +66,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[j])
 		str[i++] = s2[j++];
 	str[i] = '\0';
-	free(s1); // TODO remove free
+	// free(s1); // TODO remove free
 	return (str);
+}
+
+bool	is_space(char ch)
+{
+	return ((ch >= 9 && ch <= 13) || ch == 32);
 }
