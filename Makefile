@@ -1,45 +1,36 @@
-NAME = Minishell
-CC = cc
-LIBS = -lreadline
-SRCS = src/utils/str_man.c src/utils/signals.c src/utils/env.c src/utils/env_utils.c \
-		main.c \
+NAME= minishell
 
-HEADER = minishell.h
-FLAGS = -Wall -Wextra -Werror -g
-OBJS = $(SRCS:.c=.o)
+CC= cc
+CFLAGS= -Wall -Wextra -fsanitize=address
+BUILD_FLAGS=
 
+INCLUDES= -I./include
+HEADERS= $(shell find $(CWD) -type f -name "*.h")
 
-all: banner $(NAME) finish
+CWD=.
+BUILD_DIR= build
 
-banner:
-	@echo "\066[1;35m"
-	@echo " __  __ _       _     _          _ _ "
-	@echo "|  \/  (_)     (_)   | |        | | |"
-	@echo "| \  / |_ _ __  _ ___| |__   ___| | |"
-	@echo "| |\/| | | '_ \| / __| '_ \ / _ \ | |"
-	@echo "| |  | | | | | | \__ \ | | |  __/ | |"
-	@echo "|_|  |_|_|_| |_|_|___/_| |_|\___|_|_|"
-	@echo ""
-	@echo "          Minishell compiling..."
-	@echo "\033[0m"
+SRCS= $(shell find $(CWD) -type f -name "*.c")
+OBJS= $(addprefix $(BUILD_DIR)/, $(SRCS:$(CWD)/%.c=%.o))
 
-finish:
-	@echo "\033[1;32m✔️ Minishell Compiled\033[0m"
-
-
-$(NAME): $(OBJS)
-	@$(CC) $(OBJS) -L ~/.brew/opt/readline/lib/ -lreadline $(FLAGS) $(LIBS) -o $(NAME)
-
-.c.o: $(HEADER)
-	@$(CC) $(FLAGS) -I ~/.brew/opt/readline/include/ -c $< -o $@
+all: $(NAME)
 
 clean:
-	@rm -f $(OBJS)
-	@echo "Cleaned :3"
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: clean fclean re all
+$(NAME): $(BUILD_DIR) $(OBJS) $(HEADERS)
+	$(CC) $(CFLAGS) $(BUILD_FLAGS) $(INCLUDES) $(OBJS) -o $@
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+.PHONY: all clean fclean re

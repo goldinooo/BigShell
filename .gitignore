@@ -3,3 +3,5 @@
 *.o
 build
 Minishell
+test.txt
+Makefile.local

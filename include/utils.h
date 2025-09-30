@@ -9,7 +9,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
-
+#include <stdbool.h>
 
 // prototypes str_man1.c
 
@@ -30,12 +30,13 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 
-// prototypes str_man3.c
+// prototypes str_man4.c
 
 char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char *s1, char *s2);
+bool	is_space(char ch);
 
 // get_next_line
 
