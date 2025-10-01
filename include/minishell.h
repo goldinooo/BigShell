@@ -11,11 +11,16 @@
 // # include <readline/readline.h>
 // # include <readline/history.h>
 
+#include "utils.h"
+#include "env.h"
+
+extern char **environ;
 
 
 typedef struct s_shell
 {
-	
+	t_env	*env;
+	// TODO t_cmd struct;
 }	t_shell;
 
 #endif

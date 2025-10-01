@@ -27,7 +27,9 @@ void	script_mode(int fd/*Takes the shell struct*/)
 int main(int ac, char **av)
 {
 	// init & process the envs
+	t_shell	shell;
 
+	shell.env = init_env();
 	if (isatty(STDIN_FILENO))
 		interactive_mode(/*Takes the shell struct*/);
 	else
