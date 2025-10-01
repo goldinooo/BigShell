@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exp.h                                              :+:      :+:    :+:   */
+/*   expand_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 01:12:15 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/01 02:56:04 by abraimi          ###   ########.fr       */
+/*   Created: 2025/10/01 02:20:19 by abraimi           #+#    #+#             */
+/*   Updated: 2025/10/01 02:53:33 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXP_H
-# define EXP_H
+#include "exp.h"
 
-#include "lexer.h"
-#include "utils.h"
-#include "env.h"
 
-typedef struct s_exp
+// TODO STOPPED IN EXPANDING TOKENS
+char	*expand_token(char *key, t_env *env)
 {
-	char	*output;
-	char	*var;
-	int		start_pos;
-	bool	is_squote;
-	bool	is_dquote;
-}	t_exp;
+	bool	is_in_dquotes;
 
-char	*expand_token(char *key, t_env *env);
+	is_in_dquotes = false;
+	while (*key)
+	{
+		if (*key == '\'' && !is_in_dquotes)
+			// handle_squotes();
+			return (NULL);
+		else if (*key == '$')
+			// handle_env_key();
+			return (NULL);
+		else
+		{
+			// if (*key == '"')
 
-#endif
+		}
+	}
+	return (NULL);
+}
