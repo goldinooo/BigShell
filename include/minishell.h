@@ -13,6 +13,7 @@
 
 #include "utils.h"
 #include "env.h"
+#include "parsing.h"
 
 extern char **environ;
 
@@ -20,7 +21,8 @@ extern char **environ;
 typedef struct s_shell
 {
 	t_env	*env;
-	// TODO t_cmd struct;
+	t_cmd	*cmd;
+	int		exit_status;
 }	t_shell;
 
 #endif
