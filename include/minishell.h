@@ -13,6 +13,7 @@
 
 #include "utils.h"
 #include "env.h"
+#include "parsing.h"
 
 extern char **environ;
 
