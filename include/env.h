@@ -19,6 +19,7 @@ typedef struct s_env
 
 t_env *init_env(void);
 t_env *parse_env(void);
+char *value_from_env(char *key, t_env *env);
 
 //env_list_utils.c
 
