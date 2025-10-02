@@ -1,11 +1,21 @@
 #include "heredoc.h"
 #include "minishell.h"
 #include "parsing.h"
+#include "exp.h"
 #include "utils.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+
+char *expand_hd(char *line, t_shell *shell)
+{
+	t_exp	exp;
+	int		idx;
+
+	idx = 0;
+	
+}
 
 void	child_process(t_redir *red, t_shell *shell, char *line)
 {
