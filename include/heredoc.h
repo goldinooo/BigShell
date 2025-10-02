@@ -1,18 +1,20 @@
 #ifndef HEREDOC_H
 #define HEREDOC_H
 
-#include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include "utils.h"
-#include <sys/wait.h>
+#include "exp.h"
+
+typedef struct s_shell	t_shell;
 
 #define EXIT_SIG 30
-#define TMP_HD "path" //! todo "/tmp/.minishell_heredoc.tmp"
+#define TMP_HD "/tmp/.doctorishere.tmp"
 
-void	ignore_sigint(void);
-void	ignore_sigint(void);
-void 	setup_heredoc_signals(void);
+void	ignore_main_sigint(void);
+
+char	*expand_heredoc(t_shell *shell, char *line);
+
+/*
+	Heredoc signals
+*/
+void 	init_heredoc_signals(void);
 
 #endif
