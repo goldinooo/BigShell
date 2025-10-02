@@ -1,17 +1,64 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include "lexer.h"
 
-typedef struct s_redir 
+typedef struct	s_shell	t_shell;
+
+typedef struct s_redir
 {
+	char *file;
+	int heredoc_fd;
+	bool shouldexpand;
+	size_t type;
 	struct s_redir *next;
 } t_redir;
 
 typedef struct s_cmd
 {
-	char	**args;
-	t_redir	*redir;
-	struct s_cmd	*next;
+	char **args;
+	t_redir *redir;
+	struct s_cmd *next;
 }	t_cmd;
+
+void	parser(t_token *tokens, t_shell *shell);
+
+bool	is_valid_syntax(t_token *tokens);
+
+/*
+	Cmds & Redirs lists funtions
+*/
+t_cmd	*lst_new_cmd(char *args[]);
+t_cmd	*lst_last_cmd(t_cmd *cmds);
+t_cmd	*lst_append_cmd(t_cmd *cmds, t_cmd *node);
+void	lst_clear_cmd(t_cmd *cmds);
+
+t_redir	*lst_new_redir(size_t type, char *file);
+t_redir	*lst_last_redir(t_redir *redirs);
+t_redir	*lst_append_redirs(t_redir *redirs, t_redir *node);
+void	lst_clear_redirs(t_redir *redirs);
+
+/*
+	Cleaning functions
+*/
+void	clr_char_array(char **array);
+
+/*
+	Cmds && redirs filling
+*/
+char	**fill_cmds(t_token *tokens, size_t cmds);
+
+
+/*
+	Fill functions
+*/
+t_redir	*fill_redirs(t_token *tokens, size_t redirs);
+
+
+/*
+	Parser utils
+*/
+t_token	*skip_cmds(t_token *tokens, size_t cmds);
+t_token	*skip_redirs(t_token *tokens, size_t redirs, size_t cmds);
 
 #endif

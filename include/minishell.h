@@ -21,8 +21,8 @@ extern char **environ;
 typedef struct s_shell
 {
 	t_env	*env;
-	t_cmd 	*cmd;
-	int 	exit_status;
+	t_cmd	*cmd;
+	int		exit_status;
 }	t_shell;
 
 #endif
