@@ -1,0 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 19:52:59 by abraimi           #+#    #+#             */
+/*   Updated: 2025/10/01 20:14:06 by abraimi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+void	clr_char_array(char **array)
+{
+	size_t	idx;
+
+	if (!array)
+		return ;
+	idx = 0;
+	while (array[idx])
+		free(array[idx++]);
+	free(array);
+}

@@ -2,7 +2,7 @@ NAME= minishell
 
 CC= cc
 CFLAGS= -Wall -Wextra -fsanitize=address
-BUILD_FLAGS= -lreadline
+# BUILD_FLAGS= -lreadline
 
 INCLUDES= -I./include
 HEADERS= $(shell find $(CWD) -type f -name "*.h")
