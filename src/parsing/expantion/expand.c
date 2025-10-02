@@ -90,7 +90,14 @@ void	expand(t_shell *shell)
 		while (ptr->args[idx])
 		{
 			value = expand_var(shell, ptr->args[idx]);
-			if ()
+			if (multiple_args(value, false, false, false))
+				ptr->args = append_args(ptr->args, value, &idx, 0);
+			else
+			{
+				ptr->args[idx] = value;
+				idx++;
+			}
 		}
+		
 	}
 }

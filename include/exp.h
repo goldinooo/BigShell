@@ -35,5 +35,12 @@ char *app_char(char *s, char c);
 bool should_expand(bool squote);
 bool	valid_expand(char c, char next, bool squote);
 
+// expand_guard
+
+bool multiple_args(char *value, bool space, bool squotes, bool dquotes);
+int args_len(char **args);
+char **append_args(char **args, char *value, int *pos, int sub);
+
+
 
 #endif
