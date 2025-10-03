@@ -1,8 +1,4 @@
-#include "heredoc.h"
-#include "utils.h"
-#include <signal.h>
-#include <unistd.h>
-#include <readline/readline.h>
+#include "minishell.h"
 
 static void sig_handler(int signum)
 {

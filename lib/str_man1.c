@@ -1,11 +1,4 @@
-#include "utils.h"
-
-static int	ft_isspace(char c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return (0);
-}
+#include "lib.h"
 
 int	ft_atoi(const char *str)
 {
@@ -16,7 +9,7 @@ int	ft_atoi(const char *str)
 	result = 0;
 	sign = 1;
 	idx = 0;
-	while (ft_isspace(str[idx]))
+	while (is_space(str[idx]))
 		idx++;
 	if (str[idx] == '-' || str[idx] == '+')
 	{

@@ -3,7 +3,7 @@
 
 #include "env.h"
 #include "exp.h"
-#include "utils.h"
+#include "lib.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

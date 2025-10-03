@@ -6,12 +6,12 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 22:56:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/09/30 22:58:49 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/03 21:15:26 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-#include "utils.h"
+#include "lib.h"
 
 t_token	*create_token(char *value, t_tktype type)
 {

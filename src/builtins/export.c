@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 07:04:21 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 18:24:46 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/03 21:25:13 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "exp.h"
 #include "minishell.h"
 #include "parsing.h"
-#include "utils.h"
+#include "lib.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -83,7 +83,8 @@ static void	export_var(t_shell *shell, char *var)
 		kv = ft_split(var, '=');
 		if (!kv || !*kv)
 			return ;
-		if (is_valid_key(valid_expand, kv[0]))
+		// if (is_valid_key(valid_expand, kv[0]))
+		if (is_valid_id(kv[0]))
 		{
 			assign_env(shell, kv[0], kv[1]);
 			shell->exit_status = EXIT_SUCCESS;

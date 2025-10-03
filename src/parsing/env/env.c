@@ -1,6 +1,6 @@
 #include "env.h"
 #include "minishell.h"
-#include "utils.h"
+#include "lib.h"
 
 t_env *init_env(void)
 {
@@ -28,7 +28,7 @@ t_env *parse_env(void)
 
 	idx = 0;
 	env_list = NULL;
-	while (environ[idx]) 
+	while (environ[idx])
 	{
 		eq = ft_strchr(environ[idx], '=');
 		if(eq)
@@ -37,7 +37,7 @@ t_env *parse_env(void)
 				 ft_substr(environ[idx], 0, eq - environ[idx]));
 			if (!node)
 			{
-				ft_lst_clear_env(&env_list);				
+				ft_lst_clear_env(&env_list);
 				return (NULL);
 			}
 			ft_lst_back_env(&env_list, node);

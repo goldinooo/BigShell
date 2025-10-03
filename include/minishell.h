@@ -12,7 +12,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-#include "utils.h"
+#include "lib.h"
 #include "env.h"
 #include "parsing.h"
 #include "heredoc.h"

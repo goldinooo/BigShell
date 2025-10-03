@@ -1,5 +1,5 @@
 #include "minishell.h"
-#include "utils.h"
+#include "lib.h"
 
 int is_valid_id(char *str)
 {

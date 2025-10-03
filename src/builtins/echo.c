@@ -1,6 +1,6 @@
 #include "exp.h"
 #include "minishell.h"
-#include "utils.h"
+#include "lib.h"
 #include <stdlib.h>
 #include <unistd.h>
 

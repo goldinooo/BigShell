@@ -1,6 +1,6 @@
 #include "env.h"
 #include "minishell.h"
-#include "utils.h"
+#include "lib.h"
 #include <stdlib.h>
 
 void ex_env(t_shell *shell)

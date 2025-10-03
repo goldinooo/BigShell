@@ -6,14 +6,14 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:10:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/01 22:31:14 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/03 21:16:02 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "minishell.h"
 #include "parsing.h"
-#include "utils.h"
+#include "lib.h"
 #include <stddef.h>
 
 void	cmds_and_redirs(t_token *tokens, size_t *cmds, size_t *redirs)
