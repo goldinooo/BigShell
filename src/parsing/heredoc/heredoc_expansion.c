@@ -24,15 +24,15 @@ bool	should_heredoc_expand(t_redir *redir)
 
 char	*expand_heredoc(t_shell *shell, char *line)
 {
-	size_t	idx;
+	int	idx;
 	t_exp	exp;
 
 	init_exp(&exp);
 	idx = 0;
 	while (line[idx])
 	{
-		if (valid_exp(line[idx], line[idx + 1], false))
-			expander_magic(&exp, line, &idx, shell);
+		if (valid_expand(line[idx], line[idx + 1], false))
+			expander_magic(&exp, line, idx, shell);
 		else
 			exp.output = app_char(exp.output, line[idx]);
 		idx++;

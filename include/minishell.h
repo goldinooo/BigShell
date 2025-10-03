@@ -9,8 +9,8 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <fcntl.h>
-// # include <readline/readline.h>
-// # include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 #include "utils.h"
 #include "env.h"

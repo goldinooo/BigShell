@@ -1,8 +1,8 @@
 NAME= minishell
 
 CC= cc
-CFLAGS= -Wall -Wextra -fsanitize=address
-# BUILD_FLAGS= -lreadline
+CFLAGS= -Wall -Wextra
+BUILD_FLAGS= -lreadline
 
 INCLUDES= -I./include
 HEADERS= $(shell find $(CWD) -type f -name "*.h")
@@ -24,7 +24,7 @@ fclean: clean
 re: fclean all
 
 $(NAME): $(BUILD_DIR) $(OBJS) $(HEADERS)
-	$(CC) $(CFLAGS) $(BUILD_FLAGS) $(INCLUDES) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(BUILD_FLAGS) -o $@
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)

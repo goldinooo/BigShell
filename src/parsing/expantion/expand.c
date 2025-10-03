@@ -58,7 +58,7 @@ char *expand_var(t_shell *shell, char *value)
 {
 	t_exp	exp;
 	int 	idx;
-
+	
 	idx = 0;
 	init_exp(&exp);
 	while(value[idx])
@@ -70,11 +70,23 @@ char *expand_var(t_shell *shell, char *value)
 		else if (valid_expand(value[idx], value[idx + 1], exp.is_squote))
 			idx = expander_magic(&exp, value, idx, shell);
 		else
-		 	skip_and_join(&exp, value, idx);
+			skip_and_join(&exp, value, idx);
 		idx++;
 	}
 	free(value);
 	return (exp.output);
+}
+
+void	exp_redir(t_redir *red, t_shell *shell)
+{
+	while(red)
+	{
+		if(red->type != TK_HEREDOC)
+			red->file = expand_var(shell, red->file);
+		else if (red->type == TK_HEREDOC)
+			should_heredoc_expand(red);
+		red = red->next;
+	}
 }
 
 void	expand(t_shell *shell)
@@ -98,6 +110,7 @@ void	expand(t_shell *shell)
 				idx++;
 			}
 		}
-		
+		exp_redir(ptr->redir, shell);
+		ptr = ptr->next;
 	}
 }

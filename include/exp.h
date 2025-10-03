@@ -18,6 +18,9 @@
 #include "env.h"
 #include <stdbool.h>
 
+typedef struct s_shell	t_shell;
+typedef struct s_redir	t_redir;
+
 typedef struct s_exp
 {
 	char	*output;
@@ -40,6 +43,14 @@ bool	valid_expand(char c, char next, bool squote);
 bool multiple_args(char *value, bool space, bool squotes, bool dquotes);
 int args_len(char **args);
 char **append_args(char **args, char *value, int *pos, int sub);
+
+// expand.c
+
+int 	expander_magic(t_exp *exp, char *value, int i, t_shell *shell);
+void	skip_and_join(t_exp *exp, char *value, int i);
+char 	*expand_var(t_shell *shell, char *value);
+void	exp_redir(t_redir *red, t_shell *shell);
+void	expand(t_shell *shell);
 
 
 
