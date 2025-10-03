@@ -7,6 +7,7 @@
 #include <readline/readline.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "exec.h"
 
 void	process_line(char *line, t_shell *shell)
@@ -17,13 +18,13 @@ void	process_line(char *line, t_shell *shell)
     parser(tokens, shell);
     free_tokens(tokens);
 	expand(shell);
-	execute(shell);
 	clean_quotes(shell->cmd);
 	if (!process_heredoc(shell))
 	{
 		//  TODO CLEANUP THE SHELL STRUCT
 		return ;
 	}
+	execute(shell);
 	/*
 		? START TESTING
 	*/

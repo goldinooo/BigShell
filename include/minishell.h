@@ -43,4 +43,9 @@ void	ignore_main_sigint(void);
 */
 bool	clean_quotes(t_cmd *cmd);
 
+/*
+	Clean Quotes: utils/exp_unst_utils.c
+*/
+int is_valid_id(char *str);
+
 #endif
