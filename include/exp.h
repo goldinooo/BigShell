@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:12:15 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 05:50:11 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/03 21:16:02 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EXP_H
 
 #include "lexer.h"
-#include "utils.h"
+#include "lib.h"
 #include "env.h"
 #include <stdbool.h>
 

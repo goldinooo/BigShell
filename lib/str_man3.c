@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "lib.h"
 
 static size_t	count_words(const char *str, char c)
 {

@@ -1,5 +1,5 @@
 #include "minishell.h"
-#include "utils.h"
+#include "lib.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,7 +14,7 @@ void ex_pwd(t_shell *shell)
 		ft_putstr_fd("\n", 1);
 		shell->exit_status = EXIT_SUCCESS;
 	}
-	else 
+	else
 	{
 		perror("invalid pwd behavior");
 		shell->exit_status = EXIT_SUCCESS;

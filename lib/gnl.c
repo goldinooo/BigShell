@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "lib.h"
 
 static char	*ft_before(char *str)
 {

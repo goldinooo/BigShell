@@ -6,12 +6,12 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 22:56:54 by abraimi           #+#    #+#             */
-/*   Updated: 2025/09/30 22:59:00 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/03 21:15:34 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-#include "utils.h"
+#include "lib.h"
 
 t_tktype	get_operator_type(char *input, size_t idx)
 {

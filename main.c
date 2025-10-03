@@ -2,7 +2,7 @@
 #include "lexer.h"
 #include "minishell.h"
 #include "parsing.h"
-#include "utils.h"
+#include "lib.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stddef.h>

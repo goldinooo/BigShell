@@ -1,5 +1,5 @@
 #include "exp.h"
-#include "utils.h"
+#include "lib.h"
 #include <stdbool.h>
 #include <stdlib.h>
 
