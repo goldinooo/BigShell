@@ -10,47 +10,87 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "exp.h"
+#include "lexer.h"
+#include "minishell.h"
+#include "parsing.h"
+#include "utils.h"
+#include <stdlib.h>
 
-char	*expand_tilde(char *key, t_env *env)
+int expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 {
-	char	*value;
+	char *exit_status;
 
-	value = value_from_env(ft_strdup(key), env);
-	if (!value)
-		return (ft_strdup(key));
-	if (!key[1])
-		return (ft_strdup(value));
-	else
-		return (ft_strjoin(value, key + 1));
-
+	exp->start_pos = ++i;
+	if(value[i] == '?')
+	{
+		exit_status = ft_itoa(shell->exit_status);
+		exp->output = ft_strjoin(exp->output, exit_status);
+		free(exit_status);
+	}
+	else 
+	{
+		while(ft_isalnum(value[i]) || value[i] == '_')
+			i++;
+		exp->var = ft_substr(value, exp->start_pos, i - exp->start_pos);
+		exp->var = value_from_env(exp->var, shell->env);
+		if(exp->var)
+			exp->output = ft_strjoin(exp->output, exp->var);
+		i--; // incremented in expand_var
+	}
+	return (i);
+}
+void	skip_and_join(t_exp *exp, char *value, int i)
+{
+	if (value[i] == '$' && !exp->is_dquote && !exp->is_squote)
+	{
+		if (ft_isdigit(value[i + 1]))
+			return; // skip this char
+		else if (value[i + 1] == SQUOTE || value[i + 1] == DQUOTE)
+			return;
+	}
+	exp->output = app_char(exp->output, value[i]);
 }
 
-bool	expand(t_token *tokens, t_env *env)
-{
-	t_token	*current;
-	t_token	*prev;
-	char	*value;
 
-	current = tokens;
-	prev= NULL;
-	while (current)
+char *expand_var(t_shell *shell, char *value)
+{
+	t_exp	exp;
+	int 	idx;
+
+	idx = 0;
+	init_exp(&exp);
+	while(value[idx])
 	{
-		if (current->type == TK_WORD
-			&& !(prev && (prev->type == TK_HEREDOC)))
-		{
-			value = current->value;
-			if (value[0] == '~' && (!value[1] || value[1] == '/'))
-				(free(current->value),
-					current->value = expand_tilde(value, env));
-			else
-				(free(current->value),
-					current->value = expand_token(value, env));
-			if (!current->value)
-				return (false);
-		}
-		prev = current;
-		current = current->next;
+		if (value[idx] == SQUOTE && !exp.is_dquote)
+			handle_quotes(&exp, value[idx], true);
+		else if (value[idx] == DQUOTE && !exp.is_squote)
+			handle_quotes(&exp, value[idx], false);
+		else if (valid_expand(value[idx], value[idx + 1], exp.is_squote))
+			idx = expander_magic(&exp, value, idx, shell);
+		else
+		 	skip_and_join(&exp, value, idx);
+		idx++;
 	}
-	return (true);
+	free(value);
+	return (exp.output);
+}
+
+void	expand(t_shell *shell)
+{
+	t_cmd	*ptr;
+	char	*value;
+	int 	 idx;
+
+	ptr = shell->cmd;
+	while (ptr)
+	{
+		idx = 0;
+		while (ptr->args[idx])
+		{
+			value = expand_var(shell, ptr->args[idx]);
+			if ()
+		}
+	}
 }

@@ -16,6 +16,7 @@
 #include "lexer.h"
 #include "utils.h"
 #include "env.h"
+#include <stdbool.h>
 
 typedef struct s_exp
 {
@@ -26,6 +27,13 @@ typedef struct s_exp
 	bool	is_dquote;
 }	t_exp;
 
-char	*expand_token(char *key, t_env *env);
+// expansion_utils
+
+void init_exp(t_exp *exp);
+void handle_quotes(t_exp *exp, char c, bool squote);
+char *app_char(char *s, char c);
+bool should_expand(bool squote);
+bool	valid_expand(char c, char next, bool squote);
+
 
 #endif
