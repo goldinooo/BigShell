@@ -2,22 +2,9 @@
 #include "exp.h"
 #include "minishell.h"
 #include "lib.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-
-static void print_error_fd(char *str, t_shell *shell)
-{
-	ft_putstr_fd(str, STDERR_FILENO);
-	shell->exit_status = EXIT_FAILURE;
-}
-
-static void print_perror(char *str, t_shell *shell)
-{
-	perror(str);
-	shell->exit_status = EXIT_FAILURE;
-}
 
 void	ex_cd(t_shell *shell, char **args)
 {

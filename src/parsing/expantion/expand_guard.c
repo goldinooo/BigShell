@@ -27,16 +27,6 @@ bool multiple_args(char *value, bool space, bool squotes, bool dquotes)
 	return (false);
 }
 
-int args_len(char **args)
-{
-	int idx;
-
-	idx = 0;
-	while(args[idx])
-		idx++;
-	return (idx);
-}
-
 char **append_args(char **args, char *value, int *pos, int sub)
 {
 	int idx;

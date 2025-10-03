@@ -49,7 +49,7 @@ static void unset_var(char *arg, t_shell *shell)
 	}
 }
 
-void ft_unset(t_shell *shell, char **args)
+void ex_unset(t_shell *shell, char **args)
 {
 	int idx;
 
