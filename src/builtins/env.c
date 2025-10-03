@@ -15,7 +15,8 @@ void ex_env(t_shell *shell)
 			ft_putstr_fd(cpy->key,1);
 			ft_putstr_fd("=", 1);
 			ft_putstr_fd(cpy->value, 1);
-			ft_putstr_fd("/n", 1);
+			// ft_putstr_fd("/n", 1);
+			write(1, "\n", 1);
 		}
 		cpy = cpy->next;
 	}

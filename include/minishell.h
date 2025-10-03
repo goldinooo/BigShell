@@ -16,6 +16,7 @@
 #include "env.h"
 #include "parsing.h"
 #include "heredoc.h"
+#include "exec.h"
 
 #define	SIG_KILLED 130
 
