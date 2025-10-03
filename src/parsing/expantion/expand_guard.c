@@ -48,11 +48,8 @@ char **append_args(char **args, char *value, int *pos, int sub)
 	buf = ft_split(value, ' ');
 	len = args_len(args);
 	new = (char **)malloc((len + 1) * sizeof(char *));
-	while (idx < *pos) 
-	{
-		new[idx] = ft_strdup(args[idx]);
-		free(args[idx++]);
-	}
+	while (idx < *pos)
+		(new[idx] = ft_strdup(args[idx]), free(args[idx++]));
 	while (buf[sub])
 		new[idx++] = ft_strdup(buf[sub++]);
 	sub = 0;

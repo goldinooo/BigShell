@@ -6,11 +6,13 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 20:18:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/02 20:20:13 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/03 05:33:32 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "exp.h"
 #include "minishell.h"
+#include <string.h>
 #include <sys/wait.h>
 
 void	exec_child_proc(t_shell *shell, t_redir *redir)
@@ -22,10 +24,14 @@ void	exec_child_proc(t_shell *shell, t_redir *redir)
 	fd = open(TMP_HD, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 		exit(EXIT_FAILURE);
+	redir->file = app_char(redir->file, '\n');
+	if (!redir->file)
+		exit(EXIT_FAILURE);
+	line = NULL;
 	while (true)
 	{
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
-		line = get_next_line(fd);
+		line = get_next_line(STDIN_FILENO);
 		if (!line)
 		{
 			ft_putstr_fd("\n", STDOUT_FILENO);

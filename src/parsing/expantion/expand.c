@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:12:11 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/01 02:40:19 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/03 05:51:42 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 		exp->output = ft_strjoin(exp->output, exit_status);
 		free(exit_status);
 	}
-	else 
+	else
 	{
 		while(ft_isalnum(value[i]) || value[i] == '_')
 			i++;
@@ -42,16 +42,17 @@ int expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 	}
 	return (i);
 }
-void	skip_and_join(t_exp *exp, char *value, int i)
+int	skip_and_join(t_exp *exp, char *value, int idx)
 {
-	if (value[i] == '$' && !exp->is_dquote && !exp->is_squote)
+	if (value[idx] == '$' && !exp->is_dquote && !exp->is_squote)
 	{
-		if (ft_isdigit(value[i + 1]))
-			return; // skip this char
-		else if (value[i + 1] == SQUOTE || value[i + 1] == DQUOTE)
-			return;
+		if (ft_isdigit(value[idx + 1]))
+			return (idx + 2); // skip this char
+		else if (value[idx + 1] == SQUOTE || value[idx + 1] == DQUOTE)
+			return (idx + 1);
 	}
-	exp->output = app_char(exp->output, value[i]);
+	exp->output = app_char(exp->output, value[idx]);
+	return (idx);
 }
 
 
@@ -59,7 +60,7 @@ char *expand_var(t_shell *shell, char *value)
 {
 	t_exp	exp;
 	int 	idx;
-	
+
 	idx = 0;
 	init_exp(&exp);
 	while(value[idx])
@@ -71,7 +72,7 @@ char *expand_var(t_shell *shell, char *value)
 		else if (valid_expand(value[idx], value[idx + 1], exp.is_squote))
 			idx = expander_magic(&exp, value, idx, shell);
 		else
-			skip_and_join(&exp, value, idx);
+			idx = skip_and_join(&exp, value, idx);
 		idx++;
 	}
 	free(value);

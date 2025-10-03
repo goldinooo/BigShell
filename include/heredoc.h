@@ -9,6 +9,8 @@ typedef struct s_redir	t_redir;
 #define EXIT_SIG 30
 #define TMP_HD "/tmp/.doctorishere.tmp"
 
+bool	process_heredoc(t_shell *shell);
+
 void	ignore_main_sigint(void);
 bool	should_heredoc_expand(t_redir *redir);
 
