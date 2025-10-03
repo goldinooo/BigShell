@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:28:23 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/02 20:20:27 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/03 06:01:57 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*expand_heredoc(t_shell *shell, char *line)
 	while (line[idx])
 	{
 		if (valid_expand(line[idx], line[idx + 1], false))
-			expander_magic(&exp, line, idx, shell);
+			idx = expander_magic(&exp, line, idx, shell);
 		else
 			exp.output = app_char(exp.output, line[idx]);
 		idx++;

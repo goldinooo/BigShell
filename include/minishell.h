@@ -37,4 +37,9 @@ void	init_main_signals(void);
 void	ignore_main_sigint(void);
 
 
+/*
+	Clean Quotes: utils/clean_quotes.c
+*/
+bool	clean_quotes(t_cmd *cmd);
+
 #endif
