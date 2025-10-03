@@ -11,6 +11,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// Forward declarations
+typedef struct s_shell t_shell;
+
 // prototypes str_man1.c
 
 int	ft_atoi(const char *str);
@@ -41,5 +44,9 @@ bool	is_space(char ch);
 // get_next_line
 
 char	*get_next_line(int fd);
+
+// test functions
+
+void	run_exp_tests(t_shell *shell);
 
 #endif

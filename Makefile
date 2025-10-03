@@ -33,4 +33,4 @@ $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re 

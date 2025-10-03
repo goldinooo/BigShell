@@ -15,12 +15,12 @@
 
 typedef enum e_tktype
 {
-	TK_WORD,
-	TK_PIPE,
-	TK_REDIR_IN,
-	TK_REDIR_OUT,
-	TK_APPEND_OUT,
-	TK_HEREDOC
+	TK_WORD = 0,
+	TK_PIPE = 1,
+	TK_REDIR_IN = 2,
+	TK_REDIR_OUT = 3,
+	TK_APPEND_OUT = 4,
+	TK_HEREDOC = 5,
 }	t_tktype;
 
 typedef struct s_token

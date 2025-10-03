@@ -37,6 +37,7 @@ int expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 		exp->var = value_from_env(exp->var, shell->env);
 		if(exp->var)
 			exp->output = ft_strjoin(exp->output, exp->var);
+		exp->var = NULL;
 		i--; // incremented in expand_var
 	}
 	return (i);
