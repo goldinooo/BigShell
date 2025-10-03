@@ -19,6 +19,7 @@ void 	ft_unset(t_shell *shell, char **args);
 
 void	ex_export(t_shell *shell, char *argv[]);
 
+bool	is_faulty_redir(t_redir *redir);
 
 // execution
 void 	execute(t_shell *shell);
