@@ -1,3 +1,4 @@
+#include "exec.h"
 #include "exp.h"
 #include "minishell.h"
 #include "parsing.h"
@@ -37,7 +38,9 @@ void	exec_builtin(t_shell *shell, char **args)
 	else if (!ft_strcmp(args[0], "export"))
 		ex_export(shell, args);
 	else if (!ft_strcmp(args[0], "unset"))
-		ft_unset(shell, args);
+		ex_unset(shell, args);
+	else if (!ft_strcmp(args[0], "exit"))
+		ex_exit(shell, args);
 	// dup2(save_stdout, STDOUT_FILENO);
 	// dup2(save_stdin, STDIN_FILENO);
 	// close(save_stdin);
