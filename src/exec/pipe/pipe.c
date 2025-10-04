@@ -29,8 +29,7 @@ void	reset_and_catch_sig(t_shell *shell, int status, bool toggle)
 {
 	if (toggle)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
+		init_main_signals();
 	}
 	else
 	{
