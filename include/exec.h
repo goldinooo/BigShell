@@ -15,6 +15,7 @@ void	ex_cd(t_shell *shell, char **args);
 void 	ex_echo(t_shell *shell, char **args);
 void 	ex_env(t_shell *shell);
 void 	ex_pwd(t_shell *shell);
+void 	ft_unset(t_shell *shell, char **args);
 
 // execution
 void 	execute(t_shell *shell);
