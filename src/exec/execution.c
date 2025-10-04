@@ -75,7 +75,7 @@ void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
 	{
 		clr_char_array(envp);
 		waitpid(pid, &status, 0);
-		reset_and_catch_sig(shell, status, true);
+		reset_and_catch_sig(shell, status, false);
 	}
 	else
 	{
