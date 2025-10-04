@@ -53,7 +53,7 @@ void ft_unset(t_shell *shell, char **args)
 {
 	int idx;
 
-	if (!args || !args[1] || !shell || !shell->env)
+	if (!shell || !shell->env || !args || !args[1])
 		return;
 	idx = 1;
 	while(args[idx])

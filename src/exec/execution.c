@@ -36,6 +36,8 @@ void	exec_builtin(t_shell *shell, char **args)
 		ex_env(shell);
 	else if (!ft_strcmp(args[0], "export"))
 		ex_export(shell, args);
+	else if (!ft_strcmp(args[0], "unset"))
+		ft_unset(shell, args);
 	// dup2(save_stdout, STDOUT_FILENO);
 	// dup2(save_stdin, STDIN_FILENO);
 	// close(save_stdin);
