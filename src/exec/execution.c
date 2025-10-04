@@ -1,7 +1,13 @@
 #include "exec.h"
 #include "exp.h"
+#include "lib.h"
 #include "minishell.h"
 #include "parsing.h"
+#include <errno.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 
 
@@ -47,6 +53,59 @@ void	exec_builtin(t_shell *shell, char **args)
 	// close(save_stdout);
 }
 
+void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
+{
+	char	**envp;
+	pid_t	pid;
+	int		status;
+
+	envp = env_to_arr(shell->env);
+	if (!envp)
+		return ; //TODO Handle the malloc errors.
+	pid = fork();
+	if (pid < 0)
+		perror("fork");
+	else if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
+		reset_and_catch_sig(shell, status, true);
+	}
+	else
+	{
+		reset_and_catch_sig(shell, status, true);
+		if (!init_redirection(cmd))
+			exit(1);
+		execve(bin_path, cmd->args, envp);
+		(perror("execve"), exit(1));
+	}
+}
+
+void	exec_bin(t_shell *shell, t_cmd *cmd)
+{
+	char	*bin_path;
+	bool	has_slash;
+
+	bin_path = get_bin_path(cmd->args[0], shell->env);
+	if (!bin_path)
+	{
+		has_slash = (ft_strchr(cmd->args[0], '/') != NULL);
+		if (has_slash && !access(cmd->args[0], F_OK))
+		{
+			shell->exit_status = EACCES;
+			perror(cmd->args[0]);
+		}
+		else
+		{
+			shell->exit_status = ENOENT;
+			if (has_slash)
+				perror(cmd->args[0]);
+			else
+				return ; // TODO Print the command not found error
+		}
+	}
+	exec_in_child(shell, cmd, bin_path);
+}
+
 void execute(t_shell *shell)
 {
 	t_cmd *tmp;
@@ -60,4 +119,6 @@ void execute(t_shell *shell)
 		return ;
 	if (is_builtin(tmp->args[0]))
 		exec_builtin(shell, tmp->args);
+	else
+		exec_bin(shell, tmp);
 }

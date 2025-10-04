@@ -7,10 +7,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-//builtins
+
 typedef struct s_shell	t_shell;
+typedef struct s_cmd	t_cmd;
 
-
+//builtins
 void	ex_cd(t_shell *shell, char **args);
 void 	ex_echo(t_shell *shell, char **args);
 void 	ex_env(t_shell *shell);
@@ -23,6 +24,14 @@ bool	is_faulty_redir(t_redir *redir);
 
 // execution
 void 	execute(t_shell *shell);
+
+// find_binary
+char	*get_bin_path(char *bin, t_env *env);
+
+/*
+	./exec/redirs/redirs.c
+*/
+bool	init_redirection(t_cmd *cmd);
 
 
 #endif
