@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 21:31:52 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/04 00:54:46 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/04 23:54:01 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	redir_out(t_redir *redir)
 		fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND);
 	if (fd == -1)
 		return (perror(redir->file), false);
-	if (dup2(fd, STDIN_FILENO) == -1)
+	if (dup2(fd, STDOUT_FILENO) == -1)
 		return (perror(redir->file), close(fd), false);
 	close(fd);
 	return (true);
@@ -68,7 +68,7 @@ bool	init_redirection(t_cmd *cmd)
 	t_redir	*curr;
 
 	if (!cmd || !cmd->redir)
-		return (false);
+		return (true);
 	curr = cmd->redir;
 	while (curr)
 	{
