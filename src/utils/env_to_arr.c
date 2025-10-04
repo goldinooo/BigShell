@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 22:38:08 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/04 22:49:50 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/04 23:38:38 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,15 @@ char	**env_to_arr(t_env *env)
 	curr = env;
 	while (curr)
 	{
-		if (!curr->value)
+		if (curr->value)
 		{
 			tmp = ft_strjoin(curr->key, "=");
 			envp[idx] = ft_strjoin(tmp, curr->value);
-			(free(tmp), idx++);
+			free(tmp);
 		}
-		curr = curr->next;
+		else
+			envp[idx] = ft_strdup(curr->key);
+		(idx++, curr = curr->next);
 	}
-	envp[idx] = NULL;
-	return (envp);
+	return (envp[idx] = NULL, envp);
 }

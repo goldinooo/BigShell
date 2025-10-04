@@ -59,14 +59,21 @@ void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
 	pid_t	pid;
 	int		status;
 
+	if (!bin_path)
+		return ;
 	envp = env_to_arr(shell->env);
 	if (!envp)
 		return ; //TODO Handle the malloc errors.
+	status = 0;
 	pid = fork();
 	if (pid < 0)
-		perror("fork");
+	{
+		(perror("fork"), clr_char_array(envp));
+		return ;
+	}
 	else if (pid > 0)
 	{
+		clr_char_array(envp);
 		waitpid(pid, &status, 0);
 		reset_and_catch_sig(shell, status, true);
 	}
@@ -74,9 +81,9 @@ void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
 	{
 		reset_and_catch_sig(shell, status, true);
 		if (!init_redirection(cmd))
-			exit(1);
+			(clr_char_array(envp), exit(1));
 		execve(bin_path, cmd->args, envp);
-		(perror("execve"), exit(1));
+		(perror("execve"), clr_char_array(envp), exit(1));
 	}
 }
 
@@ -97,11 +104,12 @@ void	exec_bin(t_shell *shell, t_cmd *cmd)
 		else
 		{
 			shell->exit_status = ENOENT;
-			if (has_slash)
+			if (!has_slash || !bin_path)
 				perror(cmd->args[0]);
 			else
 				return ; // TODO Print the command not found error
 		}
+		return ;
 	}
 	exec_in_child(shell, cmd, bin_path);
 }
@@ -125,5 +133,7 @@ void execute(t_shell *shell)
 	if (is_builtin(tmp->args[0]))
 		exec_builtin(shell, tmp->args);
 	else
+	{
 		exec_bin(shell, tmp);
+	}
 }
