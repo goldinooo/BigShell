@@ -72,7 +72,7 @@ void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
 	}
 	else
 	{
-		reset_and_catch_sig(shell, status, true);
+		reset_and_catch_sig(shell, 0, true);
 		if (!init_redirection(cmd))
 			exit(1);
 		execve(bin_path, cmd->args, envp);
