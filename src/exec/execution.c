@@ -25,8 +25,8 @@ void	exec_builtin(t_shell *shell, char **args)
 	int		save_stdout;
 	int		save_stdin;
 
-	// if (!setup_with_backup(shell->cmd, &save_stdout, &save_stdin))
-	// 	return ;
+	if (!setup_with_backup(shell->cmd, &save_stdout, &save_stdin))
+		return ;
 	if (!ft_strcmp(args[0], "echo"))
 		ex_echo(shell, args);
 	else if (!ft_strcmp(args[0], "cd"))
@@ -41,10 +41,10 @@ void	exec_builtin(t_shell *shell, char **args)
 		ex_unset(shell, args);
 	else if (!ft_strcmp(args[0], "exit"))
 		ex_exit(shell, args);
-	// dup2(save_stdout, STDOUT_FILENO);
-	// dup2(save_stdin, STDIN_FILENO);
-	// close(save_stdin);
-	// close(save_stdout);
+	dup2(save_stdout, STDOUT_FILENO);
+	dup2(save_stdin, STDIN_FILENO);
+	close(save_stdin);
+	close(save_stdout);
 }
 
 void execute(t_shell *shell)
@@ -56,8 +56,13 @@ void execute(t_shell *shell)
 		return ;
 	tmp = shell->cmd;
 	prev_fd = -1;
-	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
-		return ;
+	if (tmp->next)
+	{
+		ex_pipe(shell, prev_fd, -1);
+		return;
+	}
+	if(!tmp->args || !tmp->args[0] || !tmp->args[0][0])
+		return;
 	if (is_builtin(tmp->args[0]))
 		exec_builtin(shell, tmp->args);
 }
