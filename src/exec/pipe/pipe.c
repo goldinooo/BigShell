@@ -1,14 +1,43 @@
+#include "env.h"
 #include "exec.h"
 #include "exp.h"
 #include "lexer.h"
+#include "lib.h"
 #include "minishell.h"
 #include "parsing.h"
+#include "utils.h"
 #include <signal.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
+
+void ex_external_child(t_env **env, t_cmd *cmd)
+{
+	char **env_p;
+	char *cmd_p;
+
+	cmd_p = get_bin_path(cmd->args[0], *env);
+	if(!cmd_p)
+	{
+		if (ft_strchr(cmd->args[0],'/') && access(cmd->args[0], F_OK) == 0)
+			ft_putstr_fd("errrooorr  a ba dyali", STDERR_FILENO);
+		else
+		{
+			ft_putstr_fd("./minishell  ", STDERR_FILENO);
+			ft_putstr_fd(cmd->args[0], STDERR_FILENO);
+			ft_putstr_fd("command not found a khawa dyali", STDERR_FILENO);
+		}
+		exit(127);
+	}
+	env_p = env_to_arr(*env);
+	execve(cmd_p, cmd->args, env_p);
+	perror("execve");
+	exit(127);
+}
 
 
 bool setup_with_backup(t_cmd *cmd, int *save_stdout, int *save_stdin)
@@ -88,8 +117,8 @@ void ex_child(t_shell *shell, t_cmd *cmd, int prev_fd, int pipedes[2])
 		exit(EXIT_FAILURE);
 	if (is_builtin(cmd->args[0]))
 		exec_builtin(shell, cmd->args);
-	// else
-	// 	ex_external_child(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	else
+		ex_external_child(&shell->env, cmd);
 	exit(EXIT_SUCCESS);
 }
 static void parent_fds(int prev_fd, int pipedes[2], t_cmd *cmd)
