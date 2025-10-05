@@ -12,7 +12,6 @@
 
 #include "exp.h"
 #include "minishell.h"
-#include <string.h>
 #include <sys/wait.h>
 
 void	exec_child_proc(t_shell *shell, t_redir *redir)
