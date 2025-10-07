@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:10:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 21:16:02 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/07 05:12:35 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include "minishell.h"
 #include "parsing.h"
 #include "lib.h"
+#include <stdbool.h>
 #include <stddef.h>
 
-void	cmds_and_redirs(t_token *tokens, size_t *cmds, size_t *redirs)
+void	count_cmds_and_redirs(t_token *tokens, size_t *cmds, size_t *redirs)
 {
 	t_token	*curr;
 	size_t	cmds_local;
@@ -30,9 +31,9 @@ void	cmds_and_redirs(t_token *tokens, size_t *cmds, size_t *redirs)
 		if (curr->type != TK_WORD)
 		{
 			redirs_local++;
-			curr = curr->next; // skip redirection operator
+			curr = curr->next;
 			if (curr)
-				curr = curr->next; // skip filename
+				curr = curr->next;
 		}
 		else
 		{
@@ -44,11 +45,27 @@ void	cmds_and_redirs(t_token *tokens, size_t *cmds, size_t *redirs)
 	*redirs = redirs_local;
 }
 
-void	parser(t_token *tokens, t_shell *shell)
+t_token	*parse_cmds(t_shell *shell, t_token *token)
 {
 	size_t	redirs;
 	size_t	cmds;
 	t_cmd	*node;
+
+	count_cmds_and_redirs(token, &cmds, &redirs);
+	node = lst_new_cmd(fill_cmds(token, cmds));
+	if (!node)
+		return (NULL);
+	token = skip_cmds(token, cmds);
+	node->redir = fill_redirs(token, redirs);
+	if (!node->redir && redirs > 0)
+		return (clr_char_array(node->args), free(node), NULL);
+	token = skip_redirs(token, redirs);
+	shell->cmd = lst_append_cmd(shell->cmd, node);
+	return (token);
+}
+
+void	parser(t_token *tokens, t_shell *shell)
+{
 	t_token	*curr;
 
 	if (is_valid_syntax(tokens))
@@ -58,27 +75,14 @@ void	parser(t_token *tokens, t_shell *shell)
 		{
 			if (curr->type != TK_PIPE)
 			{
-				cmds_and_redirs(curr, &cmds, &redirs);
-				// TODO j = cmds -1, to know how many commads to skip before getting to the redir
-				node = lst_new_cmd(fill_cmds(curr, cmds));
-				if (!node)
-					return ; // TODO Add a proper malloc handling.
-				curr = skip_cmds(curr, cmds);
-				node->redir = fill_redirs(curr, redirs);
-				if (!node->redir && redirs > 0)
-				{
-					clr_char_array(node->args);
-					free(node);
-					return ;
-				}
-				curr = skip_redirs(curr, redirs, cmds);
-				shell->cmd = lst_append_cmd(shell->cmd, node);
+				curr = parse_cmds(shell, curr);
+				if (!curr)
+					return ; // TODO Print error here if required
 			}
 			else
 				curr = curr->next;
 		}
 	}
 	else
-		// TODO Add the exit code to the exit_status variable
-		return ; //! Remove me
+		shell->exit_status = 2;
 }

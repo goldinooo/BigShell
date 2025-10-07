@@ -13,9 +13,9 @@ bool	is_op(char ch)
 
 bool	is_redir(char ch, int dir)
 {
-	if (dir == 0) // input redirection
+	if (dir == 0)
 		return (ch == REDIR_IN);
-	else if (dir == 1) // output redirection
+	else if (dir == 1)
 		return (ch == REDIR_OUT);
 	return (false);
 }
