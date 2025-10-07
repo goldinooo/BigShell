@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s1)
 	char	*ptr;
 	size_t	i;
 
-	ptr = malloc(ft_strlen(s1) + 1);
+	ptr = (char *)malloc(ft_strlen(s1) * sizeof(char) + 1);
 	i = 0;
 	if (!ptr)
 		return (NULL);

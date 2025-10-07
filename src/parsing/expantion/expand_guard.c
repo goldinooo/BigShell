@@ -36,19 +36,20 @@ char **append_args(char **args, char *value, int *pos, int sub)
 
 	idx = 0;
 	buf = ft_split(value, ' ');
-	len = args_len(args);
+	len = args_len(args) + args_len(buf);
 	new = (char **)malloc((len + 1) * sizeof(char *));
 	while (idx < *pos)
 		(new[idx] = ft_strdup(args[idx]), free(args[idx++]));
 	while (buf[sub])
 		new[idx++] = ft_strdup(buf[sub++]);
-	sub = 0;
-	while(args[*pos + sub++])
+	sub = *pos + 1;
+	while(args[sub])
 	{
-		new[idx++] = ft_strdup(args[*pos + sub]);
-		free(args[*pos + sub]);
+		new[idx++] = ft_strdup(args[sub]);
+		free(args[sub]);
+		sub++;
 	}
 	new[idx] = NULL;
-	*pos += (len - 1);
+	*pos += (args_len(buf) - 1);
 	return (free(value), free(args), clr_char_array(buf), new);
 }

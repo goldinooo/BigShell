@@ -1,7 +1,7 @@
 NAME= minishell
 
 CC= cc
-CFLAGS= -Wall -Wextra
+CFLAGS= -Wall -Wextra -fsanitize=address -ggdb3
 BUILD_FLAGS= -lreadline
 
 INCLUDES= -I./include

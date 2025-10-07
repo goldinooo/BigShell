@@ -21,7 +21,7 @@
 int expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 {
 	char *exit_status;
-
+	char *tmp;
 	exp->start_pos = ++i;
 	if(value[i] == '?')
 	{
@@ -36,7 +36,11 @@ int expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 		exp->var = ft_substr(value, exp->start_pos, i - exp->start_pos);
 		exp->var = value_from_env(exp->var, shell->env);
 		if(exp->var)
+		{
+			tmp = exp->output;
 			exp->output = ft_strjoin(exp->output, exp->var);
+			free(tmp);
+		}
 		exp->var = NULL;
 		i--; // incremented in expand_var
 	}
