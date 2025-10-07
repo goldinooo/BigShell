@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:34:52 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/01 03:57:54 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/07 06:07:22 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-bool	init_redir_fd(int *fd)
+int	init_redir_fd(void)
 {
-	*fd = dup(STDOUT_FILENO);
-	if (*fd == -1)
-		return (false);
+	int	fd;
+
+	fd = dup(STDOUT_FILENO);
+	if (fd == -1)
+		return (-1);
 	if (dup2(STDERR_FILENO, STDOUT_FILENO) == -1)
-		return (close(*fd), false);
-	return (true);
+		return (close(fd), -1);
+	return (fd);
 }
 
 bool	is_quotes_unclosed(char *token)
@@ -46,7 +48,7 @@ bool	is_quotes_unclosed(char *token)
 	return (true);
 }
 
-bool	is_pipe_valid(t_token *prev, t_token *curr)
+bool	is_valid_pipe(t_token *prev, t_token *curr)
 {
 	if (curr->type == TK_PIPE)
 	{
@@ -60,7 +62,7 @@ bool	is_pipe_valid(t_token *prev, t_token *curr)
 	return (true);
 }
 
-bool	is_valid_redir(t_token *curr)
+static bool	is_valid_redir(t_token *curr)
 {
 	unsigned int	type;
 
@@ -82,7 +84,7 @@ bool	is_valid_redir(t_token *curr)
 	return (true);
 }
 
-bool	restore_redir_fd(int *fd)
+static bool	restore_redir_fd(int *fd)
 {
 	if (dup2(*fd, STDOUT_FILENO) == -1)
 		return (close(*fd), false);
@@ -97,7 +99,8 @@ bool	is_valid_syntax(t_token *tokens)
 	t_token	*prev;
 	int		fd;
 
-	if (!init_redir_fd(&fd))
+	fd = init_redir_fd();
+	if (fd == -1)
 		return (false);
 	prev = tokens;
 	curr = tokens;
@@ -105,7 +108,7 @@ bool	is_valid_syntax(t_token *tokens)
 	{
 		if (!is_quotes_unclosed(curr->value))
 			return (false);
-		else if (!is_pipe_valid(prev, curr))
+		else if (!is_valid_pipe(prev, curr))
 			return (false);
 		else if (!is_valid_redir(curr))
 			return (false);
@@ -116,3 +119,4 @@ bool	is_valid_syntax(t_token *tokens)
 		return (false);
 	return (true);
 }
+// TODO STOPED HERE
