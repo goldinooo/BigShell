@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 22:56:54 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/07 04:30:26 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/08 00:35:46 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,15 @@ size_t	process_operator(char *input, size_t idx, t_token **tokens)
 
 	type = get_operator_type(input, idx);
 	if (type == TK_HEREDOC || type == TK_APPEND_OUT)
-		(op_value = ft_substr(input, idx, 2), idx += 2);
+	{
+		op_value = ft_substr(input, idx, 2);
+		idx += 2;
+	}
 	else
-		(op_value = ft_substr(input, idx, 1), idx += 1);
+	{
+		op_value = ft_substr(input, idx, 1);
+		idx += 1;
+	}
 	if (!op_value)
 		return (-1);
 	new_token = create_token(op_value, type);
@@ -77,7 +83,7 @@ void	lexer(char *input, t_token **tokens)
 	{
 		idx = skip_spaces(input, idx);
 		if (!input[idx])
-			break;
+			break ;
 		if (is_op(input[idx]))
 			idx = process_operator(input, idx, tokens);
 		else

@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:35:56 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/01 21:58:22 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/08 04:00:36 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_cmd	*lst_new_cmd(char *args[])
 	node->args = args;
 	node->redir = NULL;
 	node->next = NULL;
-
 	return (node);
 }
 

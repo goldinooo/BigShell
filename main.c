@@ -34,7 +34,7 @@ void	process_line(char *line, t_shell *shell)
 
 char	*generate_prompt(t_shell *shell)
 {
-	return (ft_strdup("\nminishell $> "));
+	return (ft_strdup("︻芫═─── $> "));
 }
 
 void	interactive_mode(t_shell *shell)

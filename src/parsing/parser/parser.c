@@ -6,18 +6,53 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:10:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/07 05:12:35 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/08 03:59:45 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "minishell.h"
 #include "parsing.h"
-#include "lib.h"
-#include <stdbool.h>
-#include <stddef.h>
+#include "minishell.h"
 
-void	count_cmds_and_redirs(t_token *tokens, size_t *cmds, size_t *redirs)
+static t_token	*skip_cmds(t_token *tokens, size_t cmds)
+{
+	t_token	*curr;
+
+	curr = tokens;
+	while (cmds > 0 && curr)
+	{
+		if (curr->type == TK_WORD)
+		{
+			cmds--;
+			curr = curr->next;
+		}
+		else
+		{
+			curr = curr->next;
+			if (curr)
+				curr = curr->next;
+		}
+	}
+	return (curr);
+}
+
+static t_token	*skip_redirs(t_token *tokens, size_t redirs)
+{
+	t_token	*curr;
+
+	curr = tokens;
+	while (redirs > 0 && curr)
+	{
+		curr = curr->next;
+		if (curr)
+			curr = curr->next;
+		redirs--;
+	}
+	if (curr && curr->type == TK_PIPE)
+		curr = curr->next;
+	return (curr);
+}
+
+static void	count_cmds_and_redirs(t_token *tokens, size_t *cmds, size_t *redirs)
 {
 	t_token	*curr;
 	size_t	cmds_local;
@@ -45,7 +80,7 @@ void	count_cmds_and_redirs(t_token *tokens, size_t *cmds, size_t *redirs)
 	*redirs = redirs_local;
 }
 
-t_token	*parse_cmds(t_shell *shell, t_token *token)
+static t_token	*parse_cmds(t_shell *shell, t_token *token)
 {
 	size_t	redirs;
 	size_t	cmds;
@@ -77,12 +112,12 @@ void	parser(t_token *tokens, t_shell *shell)
 			{
 				curr = parse_cmds(shell, curr);
 				if (!curr)
-					return ; // TODO Print error here if required
+					return ;
 			}
 			else
 				curr = curr->next;
 		}
 	}
 	else
-		shell->exit_status = 2;
+		shell->exit_status = EXIT_SYNTAX;
 }

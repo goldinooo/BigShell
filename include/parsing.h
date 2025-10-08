@@ -58,7 +58,8 @@ t_redir	*fill_redirs(t_token *tokens, size_t redirs);
 /*
 	Parser utils
 */
-t_token	*skip_cmds(t_token *tokens, size_t cmds);
-t_token	*skip_redirs(t_token *tokens, size_t redirs);
+bool	is_valid_pipe(t_token *prev, t_token *curr);
+bool	is_valid_redir(t_token *curr);
+
 
 #endif

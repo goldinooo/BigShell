@@ -52,4 +52,9 @@ bool	clean_quotes(t_cmd *cmd);
 int is_valid_id(char *str);
 void print_any(char **cmd);
 
+/*
+	Errors
+*/
+void	bprint_err(char *msg);
+
 #endif

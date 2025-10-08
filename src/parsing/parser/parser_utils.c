@@ -6,44 +6,51 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:26:02 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/07 04:51:33 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/08 04:06:07 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parsing.h"
 #include "minishell.h"
 
-t_token	*skip_cmds(t_token *tokens, size_t cmds)
-{
-	t_token	*curr;
+#define SYNTAX_ERR "syntax error near unexpected token `newline'"
 
-	curr = tokens;
-	while (cmds > 0 && curr)
+bool	is_valid_pipe(t_token *prev, t_token *curr)
+{
+	if (curr->type == TK_PIPE)
 	{
-		if (curr->type == TK_WORD)
-			(cmds--, curr = curr->next);
-		else
+		if (prev->type != TK_WORD)
 		{
-			curr = curr->next;
-			if (curr)
-				curr = curr->next;
+			bprint_err(SYNTAX_ERR);
+			return (false);
+		}
+		if (!curr->next)
+		{
+			bprint_err(SYNTAX_ERR);
+			return (false);
 		}
 	}
-	return (curr);
+	return (true);
 }
 
-t_token	*skip_redirs(t_token *tokens, size_t redirs)
+bool	is_valid_redir(t_token *curr)
 {
-	t_token	*curr;
+	unsigned int	type;
 
-	curr = tokens;
-	while (redirs > 0 && curr)
+	type = curr->type;
+	if (type == TK_REDIR_IN || type == TK_REDIR_OUT
+		|| type == TK_APPEND_OUT || type == TK_HEREDOC)
 	{
-		curr = curr->next;
-		if (curr)
-			curr = curr->next;
-		redirs--;
+		if (!curr->next)
+		{
+			bprint_err(SYNTAX_ERR);
+			return (false);
+		}
+		else if (curr->next->type != TK_WORD)
+		{
+			bprint_err(SYNTAX_ERR);
+			return (false);
+		}
 	}
-	if (curr && curr->type == TK_PIPE)
-		curr = curr->next;
-	return (curr);
+	return (true);
 }
