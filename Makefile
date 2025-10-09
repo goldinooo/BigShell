@@ -4,7 +4,7 @@ CC= cc
 
 BUILD_FLAGS= -lreadline -L/goinfre/retahri/homebrew/opt/readline/lib
 CFLAGS= -Wall -Wextra -fsanitize=address -ggdb3
-BUILD_FLAGS= -lreadline -L/Users/abraimi/homebrew/opt/readline/lib
+#UILD_FLAGS= -lreadline -L/Users/abraimi/homebrew/opt/readline/lib
 
 INCLUDES= -I./include
 HEADERS= $(shell find $(CWD) -type f -name "*.h")

@@ -61,5 +61,17 @@ t_redir	*fill_redirs(t_token *tokens, size_t redirs);
 bool	is_valid_pipe(t_token *prev, t_token *curr);
 bool	is_valid_redir(t_token *curr);
 
+/*
+	heredoc
+*/
+#define EXIT_SIG 30
+#define TMP_HD "/tmp/.doctorishere.tmp"
+
+bool	process_heredoc(t_shell *shell);
+void	ignore_main_sigint(void);
+bool	should_heredoc_expand(t_redir *redir);
+char	*expand_heredoc(t_shell *shell, char *line);
+void 	init_heredoc_signals(void);
+
 
 #endif

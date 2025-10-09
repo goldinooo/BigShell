@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 static void clean_env_key(char *key, t_env **env)
 {
 	t_env *curr;
@@ -38,14 +37,13 @@ static void clean_env_key(char *key, t_env **env)
 static void unset_var(char *arg, t_shell *shell)
 {
 	if(is_valid_id(arg))
-	{
-		shell->exit_status = EXIT_SUCCESS;
 		clean_env_key(arg, &shell->env);
-	}
 	else
 	{
-		shell->exit_status = EXIT_FAILURE;
-		perror("had error ghalat");
+		ft_putstr_fd("Minishell: unset: ", STDERR_FILENO);
+		ft_putstr_fd(arg, STDERR_FILENO);
+		ft_putstr_fd(" : not a valid identifier\n", STDERR_FILENO);
+		shell->exit_status = 1;
 	}
 }
 
@@ -62,3 +60,4 @@ void ex_unset(t_shell *shell, char **args)
 		idx++;
 	}
 }
+

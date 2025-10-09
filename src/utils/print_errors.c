@@ -42,8 +42,6 @@ void	bprint_err(char *msg)
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
 }
-	shell->exit_status = 1;
-}
 
 void ll(char **args, t_shell *shell)
 {
