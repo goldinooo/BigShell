@@ -13,24 +13,22 @@ void	ex_cd(t_shell *shell, char **args)
 	target = NULL;
 	shell->exit_status = EXIT_SUCCESS;
 	target = value_from_env(ft_strdup("HOME"), shell->env);
-	if (!target)
+	if (!target && !args[1])
 	{
-		print_error_fd("HOME not found wla chi 9alwa", shell);
+		// ft_putstr_fd("Minishell: cd: HOME not set", STDERR_FILENO);
+		// print_any(args);
+		ll(args, shell);
 		return;
 	}
 	if(!args[1] || (args[1] && !args[1][0])) // cd alone
 	{
 		if (chdir(target) != 0)
-			print_perror("cd makhadamachi wla chi 9alwa", shell);
-		return;
-	}
-	if (args[2])
-	{
-		print_error_fd("bzzf d args a khawa wla chi 9alwa", shell);
+			ll(args, shell);
+			// print_perror("cd makhadamachi", shell);
 		return;
 	}
 	if (chdir(args[1]) != 0)
-		print_any(args);
+		print_any(args, shell);
 		// print_perror ("cd makhadamachi wla chi 9alwaaaaaaaaaa", shell);
 		
 }
