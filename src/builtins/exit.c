@@ -36,12 +36,12 @@ void ex_exit(t_shell *shell, char **args)
 		exit_with_status(shell, EXIT_SUCCESS);
 	if (!is_valid_errno(args[1]))
 	{
-		print_error_fd("error machi huwa hadak", shell);
+		print_error_fd("numeric argument required", shell);
 		exit_with_status(shell, EXIT_SYNTAX);
 	}
 	if (arg_count > 2)
 	{
-		print_error_fd("too many args", shell);
+		print_error_fd("exit: too many arguments", shell);
 		return;
 	}
 	exit_code = ft_atoi(args[1]) & 0xFF; // 0 tal 255

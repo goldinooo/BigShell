@@ -19,7 +19,7 @@ void exit_with_status(t_shell *shell, int status)
 	exit(status);
 }
 
-void print_any(char **cmd)
+void print_any(char **cmd, t_shell *shell)
 {
 	int idx;
 	char *buck;
@@ -41,4 +41,21 @@ void	bprint_err(char *msg)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
+}
+	shell->exit_status = 1;
+}
+
+void ll(char **args, t_shell *shell)
+{
+	char *buck;
+	char *tmp;
+
+	if (!args[1] || !args[1][0])
+		tmp = "HOME";
+	else
+		tmp = args[1];
+	buck = ft_strjoin(PREFIX,  tmp);
+	buck = ft_strjoin(buck, " not set");
+	printf("%s", buck);
+	shell->exit_status = 1;
 }
