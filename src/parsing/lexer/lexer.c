@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 22:56:54 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/06 22:54:32 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/07 04:30:26 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,11 @@ size_t	process_operator(char *input, size_t idx, t_token **tokens)
 
 	type = get_operator_type(input, idx);
 	if (type == TK_HEREDOC || type == TK_APPEND_OUT)
-	{
-		op_value = ft_substr(input, idx, 2);
-		idx += 2;
-	}
+		(op_value = ft_substr(input, idx, 2), idx += 2);
 	else
-	{
-		op_value = ft_substr(input, idx, 1);
-		idx += 1;
-	}
+		(op_value = ft_substr(input, idx, 1), idx += 1);
+	if (!op_value)
+		return (-1);
 	new_token = create_token(op_value, type);
 	if (new_token)
 		add_token(tokens, new_token);

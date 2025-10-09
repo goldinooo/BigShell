@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 22:56:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 21:15:26 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/07 04:28:44 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,9 @@ void	add_token(t_token **tokens, t_token *new_token)
 	current->next = new_token;
 }
 
-void	free_tokens(t_token *tokens)
-{
-	t_token	*current;
-	t_token	*next;
-
-	current = tokens;
-	while (current)
-	{
-		next = current->next;
-		free(current->value);
-		free(current);
-		current = next;
-	}
-}
-
 size_t	skip_spaces(char *input, size_t idx)
 {
-	while (input[idx] && is_space(input[idx]))
+	while (is_space(input[idx]))
 		idx++;
 	return (idx);
 }

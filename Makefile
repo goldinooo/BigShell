@@ -1,8 +1,10 @@
 NAME= minishell
 
 CC= cc
-CFLAGS= -Wall -Wextra -fsanitize=address -ggdb3 -fomit-frame-pointer
+
 BUILD_FLAGS= -lreadline -L/goinfre/retahri/homebrew/opt/readline/lib
+CFLAGS= -Wall -Wextra -fsanitize=address -ggdb3
+BUILD_FLAGS= -lreadline -L/Users/abraimi/homebrew/opt/readline/lib
 
 INCLUDES= -I./include
 HEADERS= $(shell find $(CWD) -type f -name "*.h")
@@ -33,4 +35,4 @@ $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re
