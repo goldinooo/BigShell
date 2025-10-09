@@ -2,7 +2,7 @@ NAME= minishell
 
 CC= cc
 
-BUILD_FLAGS= -lreadline -L/goinfre/retahri/homebrew/opt/readline/lib
+# BUILD_FLAGS= -lreadline -L/goinfre/retahri/homebrew/opt/readline/lib
 CFLAGS= -Wall -Wextra -fsanitize=address -ggdb3
 BUILD_FLAGS= -lreadline -L/Users/abraimi/homebrew/opt/readline/lib
 
