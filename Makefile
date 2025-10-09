@@ -1,7 +1,7 @@
 NAME= minishell
 
 CC= cc
-CFLAGS= -Wall -Wextra -fsanitize=address -ggdb3
+CFLAGS= -Wall -Wextra -fsanitize=address -ggdb3 -fomit-frame-pointer
 BUILD_FLAGS= -lreadline -L/goinfre/retahri/homebrew/opt/readline/lib
 
 INCLUDES= -I./include
