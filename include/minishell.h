@@ -54,4 +54,9 @@ int is_valid_id(char *str);
 void print_any(char **cmd, t_shell *shell);
 void ll(char **args, t_shell *shell);
 
+/*
+	Errors
+*/
+void	bprint_err(char *msg);
+
 #endif

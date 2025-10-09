@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:21:59 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/01 22:31:23 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/08 04:00:51 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,16 @@ char	**fill_cmds(t_token *tokens, size_t cmds)
 		{
 			args[idx] = ft_strdup(curr->value);
 			idx++;
+			curr = curr->next;
 		}
 		else
 		{
-			// Skip redirection operator and filename
 			curr = curr->next;
 			if (curr)
 				curr = curr->next;
-			continue;
 		}
-		curr = curr->next;
 	}
-	args[idx] = NULL;
-	return (args);
+	return (args[idx] = NULL, args);
 }
 
 t_redir	*fill_redirs(t_token *tokens, size_t redirs)
@@ -57,19 +54,13 @@ t_redir	*fill_redirs(t_token *tokens, size_t redirs)
 	{
 		value = ft_strdup(curr->next->value);
 		if (!value)
-		{
-			lst_clear_redirs(redir);
-			return (NULL);
-		}
+			return (lst_clear_redirs(redir), NULL);
 		node = lst_new_redir(curr->type, value);
 		if (!node)
-		{
-			free(value);
-			lst_clear_redirs(redir);
-			return (NULL);
-		}
+			return (free(value), lst_clear_redirs(redir), NULL);
 		redir = lst_append_redirs(redir, node);
-		(redirs--, curr = curr->next->next);
+		redirs--;
+		curr = curr->next->next;
 	}
 	return (redir);
 }

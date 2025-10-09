@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 22:56:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/07 04:28:44 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/08 00:34:04 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	add_token(t_token **tokens, t_token *new_token)
 	if (!*tokens)
 	{
 		*tokens = new_token;
-		return;
+		return ;
 	}
 	current = *tokens;
 	while (current->next)
@@ -64,7 +64,7 @@ size_t	get_word_end(char *input, size_t start)
 		else if (!quote)
 		{
 			if (is_op(input[idx]) || is_space(input[idx]))
-				break;
+				break ;
 		}
 		idx++;
 	}

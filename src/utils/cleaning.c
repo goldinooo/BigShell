@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 04:27:27 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/07 04:30:45 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/08 03:55:26 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,15 @@ void	free_tokens(t_token *tokens)
 		free(current);
 		current = next;
 	}
+}
+void	clr_char_array(char **array)
+{
+	size_t	idx;
+
+	if (!array)
+		return ;
+	idx = 0;
+	while (array[idx])
+		free(array[idx++]);
+	free(array);
 }

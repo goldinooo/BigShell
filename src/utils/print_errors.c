@@ -1,4 +1,5 @@
 #include "exec.h"
+#include "lib.h"
 #include "minishell.h"
 
 void print_error_fd(char *str, t_shell *shell)
@@ -32,6 +33,15 @@ void print_any(char **cmd, t_shell *shell)
 		idx += 1;
 	}
 	perror(buck);
+}
+
+void	bprint_err(char *msg)
+{
+	ft_putstr_fd(SHELL_NAME, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+}
 	shell->exit_status = 1;
 }
 

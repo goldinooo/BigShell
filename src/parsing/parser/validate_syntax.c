@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:34:52 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/07 06:07:22 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/08 04:01:44 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-int	init_redir_fd(void)
+static int	init_redir_fd(void)
 {
 	int	fd;
 
@@ -27,7 +27,7 @@ int	init_redir_fd(void)
 	return (fd);
 }
 
-bool	is_quotes_unclosed(char *token)
+static bool	is_quotes_unclosed(char *token)
 {
 	char	quote;
 
@@ -42,56 +42,19 @@ bool	is_quotes_unclosed(char *token)
 	}
 	if (quote)
 	{
-		// TODO Print the quote error
+		bprint_err("you have some unclosed buisness.");
 		return (false);
 	}
 	return (true);
 }
 
-bool	is_valid_pipe(t_token *prev, t_token *curr)
+static int	restore_redir_fd(int fd)
 {
-	if (curr->type == TK_PIPE)
-	{
-		if (prev->type != TK_WORD)
-			// TODO Print the invalid pipe error
-			return (false);
-		if (!curr->next)
-			// TODO Print the invalid pipe error
-			return (false);
-	}
-	return (true);
+	if (dup2(fd, STDOUT_FILENO) == -1)
+		return (close(fd), -1);
+	close(fd);
+	return (fd);
 }
-
-static bool	is_valid_redir(t_token *curr)
-{
-	unsigned int	type;
-
-	type = curr->type;
-	if (type == TK_REDIR_IN || type == TK_REDIR_OUT
-		|| type == TK_APPEND_OUT || type == TK_HEREDOC)
-	{
-		if (!curr->next)
-		{
-			// TODO Print the invalid redir error
-			return (false);
-		}
-		else if (curr->next->type != TK_WORD)
-		{
-			// TODO Prin the invalid token error
-			return (false);
-		}
-	}
-	return (true);
-}
-
-static bool	restore_redir_fd(int *fd)
-{
-	if (dup2(*fd, STDOUT_FILENO) == -1)
-		return (close(*fd), false);
-	close(*fd);
-	return (true);
-}
-
 
 bool	is_valid_syntax(t_token *tokens)
 {
@@ -115,8 +78,8 @@ bool	is_valid_syntax(t_token *tokens)
 		prev = curr;
 		curr = curr->next;
 	}
-	if (!restore_redir_fd(&fd))
+	fd = restore_redir_fd(fd);
+	if (fd == -1)
 		return (false);
 	return (true);
 }
-// TODO STOPED HERE
