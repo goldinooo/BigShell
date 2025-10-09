@@ -1,4 +1,3 @@
-
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
@@ -15,9 +14,7 @@
 #include "lib.h"
 #include "env.h"
 #include "parsing.h"
-#include "heredoc.h"
 #include "exec.h"
-#include "utils.h"
 
 #define EXIT_SIGNAL 128
 #define	SIG_KILLED 130
@@ -26,7 +23,7 @@
 #define PREFIX "Minishell: cd: "
 extern char **environ;
 
-
+typedef struct s_env	t_env;
 typedef struct s_shell
 {
 	t_env	*env;
@@ -35,28 +32,17 @@ typedef struct s_shell
 }	t_shell;
 
 
-/*
-	Signals
-*/
+
 void	init_main_signals(void);
 void	ignore_main_sigint(void);
-
-
-/*
-	Clean Quotes: utils/clean_quotes.c
-*/
 bool	clean_quotes(t_cmd *cmd);
-
-/*
-	Clean Quotes: utils/exp_unst_utils.c
-*/
-int is_valid_id(char *str);
-void print_any(char **cmd, t_shell *shell);
-void ll(char **args, t_shell *shell);
-
-/*
-	Errors
-*/
+int 	is_valid_id(char *str);
+void 	print_any(char **cmd, t_shell *shell);
+void 	ll(char **args, t_shell *shell);
 void	bprint_err(char *msg);
-
+char	**env_to_arr(t_env *env);
+int 	args_len(char **args);
+void 	print_error_fd(char *str, t_shell *shell);
+void 	print_perror(char *str, t_shell *shell);
+void 	exit_with_status(t_shell *shell, int status);
 #endif

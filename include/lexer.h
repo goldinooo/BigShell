@@ -1,5 +1,5 @@
-#ifndef TOKENIZE_H
-# define TOKENIZE_H
+#ifndef LEXER_H
+# define LEXER_H
 
 #include <unistd.h>
 #include <stdlib.h>
