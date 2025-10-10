@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 02:08:55 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 06:53:16 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:22:21 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,11 @@ void	exec_bin(t_shell *shell, t_cmd *cmd)
 		{
 			shell->exit_status = EXIT_CMD_NF;
 			if (ft_strchr(cmd->args[0], '/'))
-				bprint_err((char *[]){cmd->args[0], NULL}, "No such file or directory");
+				bprint_err((char *[]){cmd->args[0], NULL},
+					"No such file or directory");
 			else
-				bprint_err((char *[]){cmd->args[0], NULL}, "command not found");
+				bprint_err((char *[]){cmd->args[0], NULL},
+					"command not found");
 		}
 		else if (S_ISDIR(st.st_mode))
 			bprint_err((char *[]){cmd->args[0], NULL}, "is a directory");
@@ -125,12 +127,11 @@ void	execute(t_shell *shell)
 	if (!shell || !shell->cmd)
 		return ;
 	tmp = shell->cmd;
-	// printf("we got here: %s\n", tmp->args[0]);
 	prev_fd = -1;
 	if (tmp->next)
 	{
 		ex_pipe(shell, prev_fd, -1);
-		return  ;
+		return ;
 	}
 	if (!tmp->args || !tmp->args[0])
 		return ;
@@ -139,4 +140,3 @@ void	execute(t_shell *shell)
 	else
 		exec_bin(shell, tmp);
 }
-

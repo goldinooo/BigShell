@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_guard.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:55:33 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 00:55:34 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:32:45 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	multiple_args(char *value, bool space, bool squotes, bool dquotes)
 	return (false);
 }
 
-char	**append_args(char **args, char *value, int *pos, int sub)
+char	**append_args(char **av, char *value, int *pos, int sub)
 {
 	int		idx;
 	int		len;
@@ -48,20 +48,22 @@ char	**append_args(char **args, char *value, int *pos, int sub)
 
 	idx = 0;
 	buf = ft_split(value, ' ');
-	len = args_len(args) + args_len(buf);
+	len = args_len(av) + args_len(buf);
 	new = (char **)malloc((len + 1) * sizeof(char *));
 	while (idx < *pos)
-		(new[idx] = ft_strdup(args[idx]), free(args[idx++]));
+	{
+		new[idx] = ft_strdup(av[idx]);
+		free(av[idx++]);
+	}
 	while (buf[sub])
 		new[idx++] = ft_strdup(buf[sub++]);
 	sub = *pos + 1;
-	while (args[sub])
+	while (av[sub])
 	{
-		new[idx++] = ft_strdup(args[sub]);
-		free(args[sub]);
+		new[idx++] = ft_strdup(av[sub]);
+		free(av[sub]);
 		sub++;
 	}
-	new[idx] = NULL;
 	*pos += (args_len(buf) - 1);
-	return (free(value), free(args), clr_char_array(buf), new);
+	return (new[idx] = NULL, free(value), free(av), clr_char_array(buf), new);
 }

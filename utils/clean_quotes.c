@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 04:57:10 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 03:28:20 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:38:10 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@
 #include "parsing.h"
 #include <stdbool.h>
 #include <stddef.h>
-
-static char *clean_check(char *cleaned)
-{
-	if(!cleaned)
-		return (NULL);
-}
+#include <time.h>
 
 static char	*clean_outer_quotes(char *arg)
 {
@@ -30,10 +25,10 @@ static char	*clean_outer_quotes(char *arg)
 	bool	dquote;
 	char	*cleaned;
 
-	(squote = false, dquote = false);
+	squote = false;
+	dquote = false;
 	idx = 0;
 	cleaned = ft_strdup("");
-	clean_check(cleaned);
 	while (arg[idx])
 	{
 		if (arg[idx] == SQUOTE && !dquote)
@@ -43,7 +38,8 @@ static char	*clean_outer_quotes(char *arg)
 		else
 		{
 			cleaned = app_char(cleaned, arg[idx]);
-			clean_check(cleaned);
+			if (!cleaned)
+				return (NULL);
 		}
 		idx++;
 	}

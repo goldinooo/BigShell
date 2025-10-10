@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:55:28 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 00:55:29 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:25:30 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_env	*init_env(void)
 	}
 	return (env);
 }
+
 t_env	*parse_env(void)
 {
 	int		idx;
@@ -46,8 +47,8 @@ t_env	*parse_env(void)
 		if (eq)
 		{
 			node = ft_lstnew_env(ft_strdup(eq + 1),
-									ft_substr(environ[idx], 0, eq
-											- environ[idx]));
+					ft_substr(environ[idx], 0, eq
+						- environ[idx]));
 			if (!node)
 			{
 				ft_lst_clear_env(&env_list);
@@ -59,6 +60,7 @@ t_env	*parse_env(void)
 	}
 	return (env_list);
 }
+
 char	*value_from_env(char *key, t_env *env)
 {
 	while (env)

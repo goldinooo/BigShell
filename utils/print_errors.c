@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:56:25 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 05:37:08 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:41:58 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,13 @@ void	print_error_fd(char *str, t_shell *shell)
 	shell->exit_status = EXIT_FAILURE;
 }
 
-void	print_perror(char *str, t_shell *shell)
-{
-	perror(str);
-	shell->exit_status = EXIT_FAILURE;
-}
-
 void	exit_with_status(t_shell *shell, int status)
 {
 	shell->exit_status = status;
 	exit(status);
 }
 
-void	print_any(char **cmd, t_shell *shell)
+void	print_any(char **cmd)
 {
 	int		idx;
 	char	*buck;

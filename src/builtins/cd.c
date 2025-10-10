@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 04:57:44 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 05:06:40 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:42:23 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	ex_cd(t_shell *shell, char **args)
 		return ;
 	}
 	if (chdir(args[1]) != 0)
-		print_any(args, shell);
+		print_any(args);
 }

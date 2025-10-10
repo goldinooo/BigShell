@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:55:22 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 00:55:24 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:26:07 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_lst_back_env(t_env **lst, t_env *node)
 
 	if (!lst || !node)
 		return ;
-	if (*lst == NULL) // empty
+	if (*lst == NULL)
 		*lst = node;
 	else
 	{

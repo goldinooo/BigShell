@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:12:11 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 21:16:02 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:29:08 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 	{
 		exit_status = ft_itoa(shell->exit_status);
 		exp->output = ft_strjoin(exp->output, exit_status);
-		free(exit_status);
+		return (free(exit_status), i);
 	}
 	else
 	{
@@ -43,16 +43,16 @@ int	expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 			free(tmp);
 		}
 		exp->var = NULL;
-		i--; // incremented in expand_var
+		return (--i);
 	}
-	return (i);
 }
+
 int	skip_and_join(t_exp *exp, char *value, int idx)
 {
 	if (value[idx] == '$' && !exp->is_dquote && !exp->is_squote)
 	{
 		if (ft_isdigit(value[idx + 1]))
-			return (idx + 2); // skip this char
+			return (idx + 2);
 		else if (value[idx + 1] == SQUOTE || value[idx + 1] == DQUOTE)
 			return (idx + 1);
 	}
