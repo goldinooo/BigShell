@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 03:18:46 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 03:54:56 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 04:49:59 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ static char	*crawl_paths(char *paths[], char *bin)
 		if (!abs_path)
 			return (NULL);
 		stat(abs_path, &st);
-		if (!S_ISDIR(st.st_mode) && (st.st_mode & S_IXOTH))
+		if (!S_ISDIR(st.st_mode) && !access(abs_path, X_OK))
 			return (abs_path);
-		else if (S_ISDIR(st.st_mode))
-			return (NULL);
 		free(abs_path);
 		idx++;
 	}
