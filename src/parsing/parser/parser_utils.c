@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "minishell.h"
+#include "parsing.h"
 
 #define SYNTAX_ERR "syntax error near unexpected token `newline'"
 
@@ -38,8 +38,8 @@ bool	is_valid_redir(t_token *curr)
 	unsigned int	type;
 
 	type = curr->type;
-	if (type == TK_REDIR_IN || type == TK_REDIR_OUT
-		|| type == TK_APPEND_OUT || type == TK_HEREDOC)
+	if (type == TK_REDIR_IN || type == TK_REDIR_OUT || type == TK_APPEND_OUT
+		|| type == TK_HEREDOC)
 	{
 		if (!curr->next)
 		{

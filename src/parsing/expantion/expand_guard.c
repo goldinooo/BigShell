@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_guard.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/10 00:55:33 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 00:55:34 by retahri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exp.h"
 #include "lexer.h"
-#include "parsing.h"
 #include "lib.h"
+#include "parsing.h"
 #include <stdlib.h>
 
-bool multiple_args(char *value, bool space, bool squotes, bool dquotes)
+bool	multiple_args(char *value, bool space, bool squotes, bool dquotes)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
-	while(value[idx])
+	while (value[idx])
 	{
 		if (space && !squotes && !dquotes)
 			return (true);
@@ -27,12 +39,12 @@ bool multiple_args(char *value, bool space, bool squotes, bool dquotes)
 	return (false);
 }
 
-char **append_args(char **args, char *value, int *pos, int sub)
+char	**append_args(char **args, char *value, int *pos, int sub)
 {
-	int idx;
-	int len;
-	char **new;
-	char **buf;
+	int		idx;
+	int		len;
+	char	**new;
+	char	**buf;
 
 	idx = 0;
 	buf = ft_split(value, ' ');
@@ -43,7 +55,7 @@ char **append_args(char **args, char *value, int *pos, int sub)
 	while (buf[sub])
 		new[idx++] = ft_strdup(buf[sub++]);
 	sub = *pos + 1;
-	while(args[sub])
+	while (args[sub])
 	{
 		new[idx++] = ft_strdup(args[sub]);
 		free(args[sub]);

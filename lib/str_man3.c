@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_man3.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/10 00:54:00 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 03:12:02 by retahri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib.h"
 
 static size_t	count_words(const char *str, char c)
@@ -34,6 +46,7 @@ static size_t	get_word_len(const char *str, char c)
 		len++;
 	return (len);
 }
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	idx;

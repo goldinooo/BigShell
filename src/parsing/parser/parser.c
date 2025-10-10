@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "minishell.h"
+#include "parsing.h"
 
 static t_token	*skip_cmds(t_token *tokens, size_t cmds)
 {

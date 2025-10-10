@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 04:27:27 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/08 03:55:26 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 03:01:43 by retahri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	free_tokens(t_token *tokens)
 		current = next;
 	}
 }
+
 void	clr_char_array(char **array)
 {
 	size_t	idx;

@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "lexer.h"
-#include "parsing.h"
 #include "lib.h"
+#include "parsing.h"
 #include <stdbool.h>
 
 bool	is_faulty_redir(t_redir *redir)
@@ -23,20 +23,19 @@ bool	is_faulty_redir(t_redir *redir)
 	{
 		filename = redir->file;
 		if (!filename || !*filename)
-			return (true); // TODO Print an error message in case the filename is either empty or NULL
+			return (true);
+			// TODO Print an error message in case the filename is either empty or NULL
 		while (is_space(*filename))
 			filename++;
 		while (*filename)
 		{
-			if (is_space(*filename)
-				&& *(filename + 1)
-				&& !is_space(*(filename + 1)))
+			if (is_space(*filename) && *(filename + 1) && !is_space(*(filename
+						+ 1)))
 			{
 				// TODO PRINT THE ERROR MESSAGE FOR faulty filename
 				return (true);
 			}
 		}
-
 	}
 	return (false);
 }

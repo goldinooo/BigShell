@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_man4.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/10 00:54:08 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 03:12:24 by retahri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib.h"
 
 char	*ft_strchr(const char *s, int c)
 {
 	if (s == NULL)
 		return (NULL);
-	c = (unsigned char) c;
+	c = (unsigned char)c;
 	while (*s != '\0')
 	{
 		if (*s == c)
-			return ((char *) s);
+			return ((char *)s);
 		s++;
 	}
 	if (c == '\0')
-		return ((char *) s);
+		return ((char *)s);
 	return (0);
 }
 
@@ -41,8 +53,9 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	if (n == i)
 		return (0);
-	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
@@ -66,7 +79,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[j])
 		str[i++] = s2[j++];
 	str[i] = '\0';
-	// free(s1); // TODO remove free
 	return (str);
 }
 

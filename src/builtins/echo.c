@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/10 00:54:21 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 00:54:22 by retahri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exp.h"
-#include "minishell.h"
 #include "lib.h"
+#include "minishell.h"
 #include <stdlib.h>
 #include <unistd.h>
 
-static int check_n_flag(char *str)
+static int	check_n_flag(char *str)
 {
-	int idx;
+	int	idx;
 
-	if(str[0] != '-' || str[1] != 'n')
+	if (str[0] != '-' || str[1] != 'n')
 		return (0);
 	idx = 2;
 	while (str[idx])
@@ -20,10 +32,10 @@ static int check_n_flag(char *str)
 	return (1);
 }
 
-void ex_echo(t_shell *shell, char **args)
+void	ex_echo(t_shell *shell, char **args)
 {
-	int idx;
-	int print_nl;
+	int	idx;
+	int	print_nl;
 
 	idx = 1;
 	print_nl = 1;
@@ -32,10 +44,10 @@ void ex_echo(t_shell *shell, char **args)
 		print_nl = 0;
 		idx++;
 	}
-	while(args[idx])
+	while (args[idx])
 	{
 		ft_putstr_fd(args[idx], 1);
-		if(args[idx + 1])
+		if (args[idx + 1])
 			ft_putstr_fd(" ", 1);
 		idx++;
 	}

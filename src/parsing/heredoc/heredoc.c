@@ -70,8 +70,8 @@ bool	exec_heredoc(t_shell *shell, t_redir *redir)
 
 bool	process_heredoc(t_shell *shell)
 {
-	t_cmd	*curr_cmd;
-	t_redir	*curr_redir;
+	t_cmd *curr_cmd;
+	t_redir *curr_redir;
 
 	curr_cmd = shell->cmd;
 	while (curr_cmd)

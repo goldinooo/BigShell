@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_signals.c                                  :+:      :+:    :+:   */
+/*   count_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 00:55:57 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 02:59:21 by retahri          ###   ########.fr       */
+/*   Created: 2025/10/10 00:56:10 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 03:02:04 by retahri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	sig_handler(int signum)
+int	args_len(char **args)
 {
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	exit(signum + EXIT_SIG);
-}
+	int	idx;
 
-void	init_heredoc_signals(void)
-{
-	struct sigaction	sa;
-
-	sa.sa_handler = sig_handler;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &sa, NULL);
-	sa.sa_handler = SIG_IGN;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGQUIT, &sa, NULL);
+	idx = 0;
+	while (args[idx])
+		idx++;
+	return (idx);
 }
