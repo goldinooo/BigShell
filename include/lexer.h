@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:52:50 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 01:02:47 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 04:43:21 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define SQUOTE "\'"
-# define DQUOTE "\""
+# define SQUOTE '\''
+# define DQUOTE '\"'
 
-# define REDIR_IN "<"
-# define REDIR_OUT ">"
-# define PIPE "|"
+# define REDIR_IN '<'
+# define REDIR_OUT '>'
+# define PIPE '|'
 
 typedef enum e_tktype
 {
