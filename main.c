@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:56:38 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 04:51:16 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 06:40:25 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	process_line(char *line, t_shell *shell)
 	t_token	*tokens;
 
 	lexer(line, &tokens);
+	free(line);
 	parser(tokens, shell);
 	free_tokens(tokens);
 	expand(shell);
 	clean_quotes(shell->cmd);
 	if (!process_heredoc(shell))
 	{
-		//  TODO CLEANUP THE SHELL STRUCT
+		clean_shell(shell);
 		return ;
 	}
 	execute(shell);
@@ -109,10 +110,16 @@ void	script_mode(int fd, t_shell *shell)
 	}
 }
 
+void	lol(void)
+{
+	system("leaks -q minishell");
+}
+
 int main(void)
 {
 	t_shell	shell;
 
+	atexit(lol);
 	shell.env = init_env();
 	shell.cmd = NULL;
 	shell.exit_status = 0;
@@ -120,5 +127,6 @@ int main(void)
 		interactive_mode(&shell);
 	else
 		script_mode(STDIN_FILENO, &shell);
+	clean_shell(&shell);
 	return (shell.exit_status);
 }

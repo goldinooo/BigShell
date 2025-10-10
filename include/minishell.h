@@ -51,10 +51,12 @@ bool					clean_quotes(t_cmd *cmd);
 int						is_valid_id(char *str);
 void					print_any(char **cmd, t_shell *shell);
 void					ll(char **args, t_shell *shell);
-void					bprint_err(char *cmd, char *msg);
+void					bprint_err(char **cmd, char *msg);
 char					**env_to_arr(t_env *env);
 int						args_len(char **args);
 void					print_error_fd(char *str, t_shell *shell);
 void					print_perror(char *str, t_shell *shell);
 void					exit_with_status(t_shell *shell, int status);
+void	clean_shell(t_shell *shell);
+
 #endif

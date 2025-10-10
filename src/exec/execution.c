@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 02:08:55 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 04:41:44 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 06:53:16 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/unistd.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -87,37 +88,8 @@ void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
 		reset_and_catch_sig(shell, status, false);
 	}
 	else
-		child_proc(shell, status, cmd, envp, bin_path);
+		child_proc(shell, status, cmd, bin_path);
 }
-
-// void	exec_bin(t_shell *shell, t_cmd *cmd)
-// {
-// 	struct stat	st;
-// 	char		*bin_path;
-
-// 	bin_path = get_bin_path(cmd->args[0], shell->env);
-// 	if (!bin_path)
-// 	{
-// 		stat(cmd->args[0], &st);
-// 		if (S_ISDIR(st.st_mode))
-// 		{
-// 			shell->exit_status = EXIT_PERM;
-// 			bprint_err(cmd->args[0], "is a directory");
-// 		}
-// 		else if (!(st.st_mode & S_IXOTH))
-// 		{
-// 			shell->exit_status = EXIT_PERM;
-// 			bprint_err(cmd->args[0], "permission denied");
-// 		}
-// 		else
-// 		{
-// 			shell->exit_status = EXIT_CMD_NF;
-// 			bprint_err(cmd->args[0], "command not found");
-// 		}
-// 		return ;
-// 	}
-// 	exec_in_child(shell, cmd, bin_path);
-// }
 
 void	exec_bin(t_shell *shell, t_cmd *cmd)
 {
@@ -127,25 +99,20 @@ void	exec_bin(t_shell *shell, t_cmd *cmd)
 	bin_path = get_bin_path(cmd->args[0], shell->env);
 	if (!bin_path)
 	{
+		shell->exit_status = EXIT_PERM;
 		if (stat(cmd->args[0], &st) == -1)
 		{
 			shell->exit_status = EXIT_CMD_NF;
-			bprint_err(cmd->args[0], "command not found");
+			if (ft_strchr(cmd->args[0], '/'))
+				bprint_err((char *[]){cmd->args[0], NULL}, "No such file or directory");
+			else
+				bprint_err((char *[]){cmd->args[0], NULL}, "command not found");
 		}
 		else if (S_ISDIR(st.st_mode))
-		{
-			shell->exit_status = EXIT_PERM;
-			bprint_err(cmd->args[0], "is a directory");
-		}
+			bprint_err((char *[]){cmd->args[0], NULL}, "is a directory");
 		else if (access(cmd->args[0], X_OK) == -1)
-		{
-			shell->exit_status = EXIT_PERM;
-			bprint_err(cmd->args[0], "Permission denied");
-		}
-		else
-			bin_path = cmd->args[0];
-		if (!bin_path)
-			return ;
+			bprint_err((char *[]){cmd->args[0], NULL}, "Permission denied");
+		return ;
 	}
 	exec_in_child(shell, cmd, bin_path);
 }
