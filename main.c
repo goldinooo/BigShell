@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:56:38 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 00:58:19 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 04:04:55 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "env.h"
 #include "exp.h"
 #include "lexer.h"
 #include "lib.h"
@@ -46,7 +47,31 @@ void	process_line(char *line, t_shell *shell)
 
 char	*generate_prompt(t_shell *shell)
 {
-	return (ft_strdup("︻芫═─── $> "));
+	char	*username;
+	char 	cwd[1024];
+	char	*prompt;
+	char	*tmp;
+
+	username = value_from_env(ft_strdup("USER"), shell->env);
+	if (!username)
+		return (NULL);
+	getcwd(cwd, sizeof(cwd));
+	prompt = ft_strjoin(username, "\e[1;35m@\e[1;32m");
+	tmp = prompt;
+	prompt = ft_strjoin(prompt, SHELL_NAME);
+	free(tmp);
+	tmp = prompt;
+	prompt = ft_strjoin(prompt, "\e[1;35m:\e[1;32m");
+	free(tmp);
+	tmp = prompt;
+	prompt = ft_strjoin(prompt, cwd);
+	free(tmp);
+	tmp = prompt;
+	prompt = ft_strjoin("\e[1;32m", prompt);
+	free(tmp);
+	tmp = prompt;
+	prompt = ft_strjoin(prompt, "\n︻芫═─── \e[1;35m$>\e[0m ");
+	return (free(tmp), prompt);
 }
 
 void	interactive_mode(t_shell *shell)
@@ -84,7 +109,7 @@ void	script_mode(int fd, t_shell *shell)
 	}
 }
 
-int	main(int ac, char **av)
+int main(void)
 {
 	t_shell	shell;
 

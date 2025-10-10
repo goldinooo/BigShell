@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 03:18:46 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/04 03:44:26 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 03:54:56 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 #include "exec.h"
 #include "lib.h"
 #include "parsing.h"
-#include <stddef.h>
 #include <unistd.h>
+#include <sys/stat.h>
 
 static char	*crawl_paths(char *paths[], char *bin)
 {
+	struct stat	st;
 	char	*abs_path;
 	char	*tmp;
 	size_t	idx;
@@ -34,8 +35,11 @@ static char	*crawl_paths(char *paths[], char *bin)
 		free(tmp);
 		if (!abs_path)
 			return (NULL);
-		if (!access(abs_path, X_OK | F_OK))
+		stat(abs_path, &st);
+		if (!S_ISDIR(st.st_mode) && (st.st_mode & S_IXOTH))
 			return (abs_path);
+		else if (S_ISDIR(st.st_mode))
+			return (NULL);
 		free(abs_path);
 		idx++;
 	}
@@ -44,6 +48,7 @@ static char	*crawl_paths(char *paths[], char *bin)
 
 char	*get_bin_path(char *bin, t_env *env)
 {
+	struct stat	st;
 	char	**paths;
 	char	*tmp;
 
@@ -51,7 +56,7 @@ char	*get_bin_path(char *bin, t_env *env)
 		return (NULL);
 	if (ft_strchr(bin, '/'))
 	{
-		if (!access(bin, X_OK | F_OK))
+		if (stat(bin, &st) != -1 && !S_ISDIR(st.st_mode) && (st.st_mode & S_IXOTH))
 			return (ft_strdup(bin));
 		return (NULL);
 	}
@@ -62,5 +67,7 @@ char	*get_bin_path(char *bin, t_env *env)
 	if (!paths)
 		return (NULL);
 	tmp = crawl_paths(paths, bin);
+	// printf("cmd: %s\n", tmp);
+	// exit(0);
 	return (clr_char_array(paths), tmp);
 }
