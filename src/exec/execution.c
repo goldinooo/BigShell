@@ -5,11 +5,10 @@
 #include "parsing.h"
 #include <errno.h>
 #include <stdio.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-
-
 
 int	is_builtin(char *cmd)
 {
@@ -63,12 +62,13 @@ void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
 		return ;
 	envp = env_to_arr(shell->env);
 	if (!envp)
-		return ; //TODO Handle the malloc errors.
+		return ;
 	status = 0;
 	pid = fork();
 	if (pid < 0)
 	{
-		(perror("fork"), clr_char_array(envp));
+		perror("fork");
+		clr_char_array(envp);
 		return ;
 	}
 	else if (pid > 0)
@@ -78,38 +78,65 @@ void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
 		reset_and_catch_sig(shell, status, false);
 	}
 	else
-	{
-		reset_and_catch_sig(shell, status, true);
-		if (!init_redirection(cmd))
-			(clr_char_array(envp), exit(1));
-		execve(bin_path, cmd->args, envp);
-		(perror("execve"), clr_char_array(envp), exit(1));
-	}
+		child_proc(shell, status, cmd, envp, bin_path);
 }
+
+// void	exec_bin(t_shell *shell, t_cmd *cmd)
+// {
+// 	struct stat	st;
+// 	char		*bin_path;
+
+// 	bin_path = get_bin_path(cmd->args[0], shell->env);
+// 	if (!bin_path)
+// 	{
+// 		stat(cmd->args[0], &st);
+// 		if (S_ISDIR(st.st_mode))
+// 		{
+// 			shell->exit_status = EXIT_PERM;
+// 			bprint_err(cmd->args[0], "is a directory");
+// 		}
+// 		else if (!(st.st_mode & S_IXOTH))
+// 		{
+// 			shell->exit_status = EXIT_PERM;
+// 			bprint_err(cmd->args[0], "permission denied");
+// 		}
+// 		else
+// 		{
+// 			shell->exit_status = EXIT_CMD_NF;
+// 			bprint_err(cmd->args[0], "command not found");
+// 		}
+// 		return ;
+// 	}
+// 	exec_in_child(shell, cmd, bin_path);
+// }
 
 void	exec_bin(t_shell *shell, t_cmd *cmd)
 {
-	char	*bin_path;
-	bool	has_slash;
+	struct stat	st;
+	char		*bin_path;
 
 	bin_path = get_bin_path(cmd->args[0], shell->env);
 	if (!bin_path)
 	{
-		has_slash = (ft_strchr(cmd->args[0], '/') != NULL);
-		if (has_slash && !access(cmd->args[0], F_OK))
+		if (stat(cmd->args[0], &st) == -1)
 		{
-			shell->exit_status = EACCES;
-			perror(cmd->args[0]);
+			shell->exit_status = EXIT_CMD_NF;
+			bprint_err(cmd->args[0], "command not found");
+		}
+		else if (S_ISDIR(st.st_mode))
+		{
+			shell->exit_status = EXIT_PERM;
+			bprint_err(cmd->args[0], "is a directory");
+		}
+		else if (access(cmd->args[0], X_OK) == -1)
+		{
+			shell->exit_status = EXIT_PERM;
+			bprint_err(cmd->args[0], "Permission denied");
 		}
 		else
-		{
-			shell->exit_status = ENOENT;
-			if (!has_slash || !bin_path)
-				perror(cmd->args[0]);
-			else
-				return ; // TODO Print the command not found error
-		}
-		return ;
+			bin_path = cmd->args[0];
+		if (!bin_path)
+			return ;
 	}
 	exec_in_child(shell, cmd, bin_path);
 }
@@ -122,18 +149,17 @@ void execute(t_shell *shell)
 	if (!shell || !shell->cmd)
 		return ;
 	tmp = shell->cmd;
+	// printf("we got here: %s\n", tmp->args[0]);
 	prev_fd = -1;
 	if (tmp->next)
 	{
 		ex_pipe(shell, prev_fd, -1);
-		return;
+		return ;
 	}
-	if(!tmp->args || !tmp->args[0] || !tmp->args[0][0])
+	if(!tmp->args || !tmp->args[0])
 		return;
 	if (is_builtin(tmp->args[0]))
 		exec_builtin(shell, tmp->args);
 	else
-	{
 		exec_bin(shell, tmp);
-	}
 }

@@ -19,7 +19,7 @@ void exit_with_status(t_shell *shell, int status)
 	exit(status);
 }
 
-void print_any(char **cmd, t_shell *shell)
+void print_any(char **cmd)
 {
 	int idx;
 	char *buck;
@@ -35,9 +35,11 @@ void print_any(char **cmd, t_shell *shell)
 	perror(buck);
 }
 
-void	bprint_err(char *msg)
+void	bprint_err(char *cmd, char *msg)
 {
 	ft_putstr_fd(SHELL_NAME, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);

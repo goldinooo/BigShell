@@ -31,6 +31,9 @@ bool	redir_out(t_redir *redir);
 void 	execute(t_shell *shell);
 int		is_builtin(char *cmd);
 void	exec_builtin(t_shell *shell, char **args);
+void	child_proc(t_shell *shell, int st, t_cmd *cmd, char **envp, char *bp);
+
+
 
 // pipe
 bool	setup_with_backup(t_cmd *cmd, int *save_stdout, int *save_stdin);

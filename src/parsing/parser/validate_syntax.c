@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:34:52 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/08 04:01:44 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 00:56:54 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static bool	is_quotes_unclosed(char *token)
 	}
 	if (quote)
 	{
-		bprint_err("you have some unclosed buisness.");
+		bprint_err(NULL, "you have some unclosed buisness.");
 		return (false);
 	}
 	return (true);

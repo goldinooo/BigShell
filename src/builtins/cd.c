@@ -28,7 +28,7 @@ void	ex_cd(t_shell *shell, char **args)
 		return;
 	}
 	if (chdir(args[1]) != 0)
-		print_any(args, shell);
+		print_any(args);
 		// print_perror ("cd makhadamachi wla chi 9alwaaaaaaaaaa", shell);
-		
+
 }
