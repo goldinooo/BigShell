@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:54:21 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 00:54:22 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:47:05 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exp.h"
-#include "lib.h"
 #include "minishell.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 static int	check_n_flag(char *str)
 {

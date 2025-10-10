@@ -6,14 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:28:23 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 21:16:02 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:11:22 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exp.h"
-#include "lib.h"
 #include "minishell.h"
-#include <stdbool.h>
 
 bool	should_heredoc_expand(t_redir *redir)
 {

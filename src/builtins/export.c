@@ -6,19 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 07:04:21 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 07:20:55 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:47:54 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "exec.h"
-#include "exp.h"
-#include "lib.h"
 #include "minishell.h"
-#include "parsing.h"
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdlib.h>
 
 #define ERR_MSG "not a valid identifier"
 

@@ -6,13 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 20:18:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 07:34:25 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:12:53 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exp.h"
 #include "minishell.h"
-#include <sys/wait.h>
 
 void	exec_child_proc(t_shell *shell, t_redir *redir)
 {

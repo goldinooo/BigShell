@@ -6,12 +6,10 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:55:28 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 07:25:30 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:10:24 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "lib.h"
 #include "minishell.h"
 
 t_env	*init_env(void)

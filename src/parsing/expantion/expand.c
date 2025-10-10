@@ -6,17 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 01:12:11 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 07:29:08 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:10:35 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "exp.h"
-#include "lexer.h"
-#include "lib.h"
 #include "minishell.h"
-#include "parsing.h"
-#include <stdlib.h>
 
 int	expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 {

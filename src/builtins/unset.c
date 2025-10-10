@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:54:57 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 00:54:58 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:48:11 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "exp.h"
-#include "lib.h"
 #include "minishell.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 static void	clean_env_key(char *key, t_env **env)
 {

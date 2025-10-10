@@ -6,16 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 04:57:44 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 07:42:23 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:46:58 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "exp.h"
-#include "lib.h"
 #include "minishell.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 void	ex_cd(t_shell *shell, char **args)
 {

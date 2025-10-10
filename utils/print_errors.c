@@ -6,12 +6,10 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:56:25 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 07:41:58 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:17:09 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "lib.h"
 #include "minishell.h"
 
 void	print_error_fd(char *str, t_shell *shell)

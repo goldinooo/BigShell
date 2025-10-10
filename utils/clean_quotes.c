@@ -6,17 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 04:57:10 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 07:38:10 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:16:45 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exp.h"
-#include "lexer.h"
-#include "lib.h"
-#include "parsing.h"
-#include <stdbool.h>
-#include <stddef.h>
-#include <time.h>
+#include "minishell.h"
 
 static char	*clean_outer_quotes(char *arg)
 {

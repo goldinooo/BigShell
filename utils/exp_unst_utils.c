@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   exp_unst_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:56:18 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 03:03:46 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:16:59 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib.h"
 #include "minishell.h"
 
 int	is_valid_id(char *str)

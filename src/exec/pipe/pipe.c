@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:55:07 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 02:12:11 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:55:40 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "exec.h"
-#include "exp.h"
-#include "lexer.h"
-#include "lib.h"
 #include "minishell.h"
-#include "parsing.h"
-#include <signal.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 bool	setup_with_backup(t_cmd *cmd, int *save_stdout, int *save_stdin)
 {
