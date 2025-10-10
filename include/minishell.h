@@ -30,6 +30,8 @@
 # define EXIT_SIGNAL 128
 # define SIG_KILLED 130
 # define EXIT_SYNTAX 2
+# define EXIT_PERM 126
+# define EXIT_CMD_NF 127
 # define SHELL_NAME "Minishell"
 # define PREFIX "Minishell: cd: "
 
@@ -49,7 +51,7 @@ bool					clean_quotes(t_cmd *cmd);
 int						is_valid_id(char *str);
 void					print_any(char **cmd, t_shell *shell);
 void					ll(char **args, t_shell *shell);
-void					bprint_err(char *msg);
+void					bprint_err(char *cmd, char *msg);
 char					**env_to_arr(t_env *env);
 int						args_len(char **args);
 void					print_error_fd(char *str, t_shell *shell);
