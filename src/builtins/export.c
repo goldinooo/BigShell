@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 07:04:21 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 02:06:55 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 05:36:28 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	assign_env(t_shell *shell, char *key, char *value)
 	t_env	*curr;
 	t_env	*node;
 
+	if (!value || !key || !shell)
+		return ;
 	curr = shell->env;
 	while (curr)
 	{
@@ -88,13 +90,15 @@ static void	export_var(t_shell *shell, char *var)
 			shell->exit_status = EXIT_SUCCESS;
 		}
 		else
-			return ; // TODO PRINT THE SYNTAX ERROR
+			bprint_err((char *[]){"export", "'", var, "'", NULL},
+				"not a valid identifier");
 		clr_char_array(kv);
 	}
 	else
 	{
 		if (!is_valid_key(valid_expand, var))
-			return ; // TODO PRINT THE SYNTAX ERROR
+			bprint_err((char *[]){"export", var, NULL},
+				"not a valid identifier");
 		else
 			shell->exit_status = EXIT_FAILURE;
 	}

@@ -6,12 +6,13 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 21:31:52 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/04 23:54:01 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 06:56:33 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "lexer.h"
+#include "lib.h"
 #include "parsing.h"
 #include <errno.h>
 #include <fcntl.h>
@@ -28,9 +29,9 @@ bool	redir_in(t_redir *redir)
 		if (fd == -1)
 		{
 			if (errno == EACCES)
-				printf("Permission denied!");
+				ft_putstr_fd("Permission denied!\n", 2);
 			if (errno == ENOENT)
-				printf("No such file or directory!");
+				ft_putstr_fd("No such file or directory!\n", 2);
 			return (false);
 		}
 		if (dup2(fd, STDIN_FILENO) == -1)

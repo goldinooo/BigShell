@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 03:18:46 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 04:49:59 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 06:53:30 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_bin_path(char *bin, t_env *env)
 		return (NULL);
 	if (ft_strchr(bin, '/'))
 	{
-		if (stat(bin, &st) != -1 && !S_ISDIR(st.st_mode) && (st.st_mode & S_IXOTH))
+		if (stat(bin, &st) != -1 && !S_ISDIR(st.st_mode) && !access(bin, X_OK))
 			return (ft_strdup(bin));
 		return (NULL);
 	}
@@ -65,7 +65,5 @@ char	*get_bin_path(char *bin, t_env *env)
 	if (!paths)
 		return (NULL);
 	tmp = crawl_paths(paths, bin);
-	// printf("cmd: %s\n", tmp);
-	// exit(0);
 	return (clr_char_array(paths), tmp);
 }

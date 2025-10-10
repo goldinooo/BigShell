@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:26:02 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 03:28:54 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:00:39 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ bool	is_valid_pipe(t_token *prev, t_token *curr)
 	{
 		if (prev->type != TK_WORD)
 		{
-			bprint_err("|", SYNTAX_ERR);
+			bprint_err((char *[]){"|", NULL}, SYNTAX_ERR);
 			return (false);
 		}
 		if (!curr->next)
 		{
-			bprint_err("|", SYNTAX_ERR);
+			bprint_err((char *[]){"|", NULL}, SYNTAX_ERR);
 			return (false);
 		}
 	}
@@ -43,12 +43,12 @@ bool	is_valid_redir(t_token *curr)
 	{
 		if (!curr->next)
 		{
-			bprint_err(NULL, SYNTAX_ERR);
+			bprint_err((char *[]){NULL}, SYNTAX_ERR);
 			return (false);
 		}
 		else if (curr->next->type != TK_WORD)
 		{
-			bprint_err(NULL, SYNTAX_ERR);
+			bprint_err((char *[]){NULL}, SYNTAX_ERR);
 			return (false);
 		}
 	}

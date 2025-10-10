@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:56:25 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 04:40:10 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 05:37:08 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,50 @@ void	print_any(char **cmd, t_shell *shell)
 {
 	int		idx;
 	char	*buck;
+	char	*tmp;
 
 	idx = 0;
 	buck = ft_strjoin(SHELL_NAME, ": ");
 	while (cmd[idx])
 	{
+		tmp = buck;
 		buck = ft_strjoin(buck, cmd[idx]);
+		free(tmp);
 		if (cmd[idx + 1])
+		{
+			tmp = buck;
 			buck = ft_strjoin(buck, ": ");
+			free(tmp);
+		}
 		idx += 1;
 	}
 	perror(buck);
+	free(buck);
 }
 
-void	bprint_err(char *cmd, char *msg)
+void	bprint_err(char **cmd, char *msg)
 {
-	ft_putstr_fd(SHELL_NAME, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(cmd, 2);
+	int		idx;
+	char	*buck;
+	char	*tmp;
+
+	idx = 0;
+	buck = ft_strjoin(SHELL_NAME, ": ");
+	while (cmd[idx])
+	{
+		tmp = buck;
+		buck = ft_strjoin(buck, cmd[idx]);
+		free(tmp);
+		if (cmd[idx + 1])
+		{
+			tmp = buck;
+			buck = ft_strjoin(buck, ": ");
+			free(tmp);
+		}
+		idx += 1;
+	}
+	ft_putstr_fd(buck, 2);
+	free(buck);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);

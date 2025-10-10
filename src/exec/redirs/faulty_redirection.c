@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 22:03:44 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 23:32:21 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 06:58:33 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ bool	is_faulty_redir(t_redir *redir)
 	if (redir->type == TK_HEREDOC && redir->shouldexpand)
 	{
 		filename = redir->file;
-		if (!filename || !*filename)
+		if (!filename)
 			return (true);
-			// TODO Print an error message in case the filename is either empty or NULL
 		while (is_space(*filename))
 			filename++;
 		while (*filename)
