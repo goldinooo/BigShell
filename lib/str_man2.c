@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_man2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:53:53 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 05:12:06 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:15:48 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	ft_strlen(const char *s)
 {
 	size_t	idx;
-	
+
 	idx = 0;
 	while (s[idx])
 		idx++;

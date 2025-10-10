@@ -6,13 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 20:18:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 05:33:32 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:12:53 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exp.h"
 #include "minishell.h"
-#include <sys/wait.h>
 
 void	exec_child_proc(t_shell *shell, t_redir *redir)
 {
@@ -21,10 +19,8 @@ void	exec_child_proc(t_shell *shell, t_redir *redir)
 
 	init_heredoc_signals();
 	fd = open(TMP_HD, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (fd == -1)
-		exit(EXIT_FAILURE);
 	redir->file = app_char(redir->file, '\n');
-	if (!redir->file)
+	if (!redir->file || fd == -1)
 		exit(EXIT_FAILURE);
 	line = NULL;
 	while (true)
@@ -70,8 +66,8 @@ bool	exec_heredoc(t_shell *shell, t_redir *redir)
 
 bool	process_heredoc(t_shell *shell)
 {
-	t_cmd *curr_cmd;
-	t_redir *curr_redir;
+	t_cmd	*curr_cmd;
+	t_redir	*curr_redir;
 
 	curr_cmd = shell->cmd;
 	while (curr_cmd)

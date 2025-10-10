@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:54:26 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 02:03:56 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:47:18 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "lib.h"
 #include "minishell.h"
-#include <stdlib.h>
 
 void	ex_env(t_shell *shell)
 {

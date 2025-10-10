@@ -6,19 +6,13 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 07:04:21 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 05:36:28 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:47:54 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "exec.h"
-#include "exp.h"
-#include "lib.h"
 #include "minishell.h"
-#include "parsing.h"
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdlib.h>
+
+#define ERR_MSG "not a valid identifier"
 
 static void	no_arg_msg(t_shell *shell)
 {
@@ -84,23 +78,21 @@ static void	export_var(t_shell *shell, char *var)
 		kv = ft_split(var, '=');
 		if (!kv || !*kv)
 			return ;
+		shell->exit_status = EXIT_FAILURE;
 		if (is_valid_id(kv[0]))
 		{
 			assign_env(shell, kv[0], kv[1]);
 			shell->exit_status = EXIT_SUCCESS;
 		}
 		else
-			bprint_err((char *[]){"export", "'", var, "'", NULL},
-				"not a valid identifier");
+			bprint_err((char *[]){"export", "'", var, "'", NULL}, ERR_MSG);
 		clr_char_array(kv);
 	}
 	else
 	{
+		shell->exit_status = EXIT_FAILURE;
 		if (!is_valid_key(valid_expand, var))
-			bprint_err((char *[]){"export", var, NULL},
-				"not a valid identifier");
-		else
-			shell->exit_status = EXIT_FAILURE;
+			bprint_err((char *[]){"export", var, NULL}, ERR_MSG);
 	}
 }
 

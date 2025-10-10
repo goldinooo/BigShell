@@ -6,23 +6,15 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:56:25 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 05:37:08 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:17:09 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "lib.h"
 #include "minishell.h"
 
 void	print_error_fd(char *str, t_shell *shell)
 {
 	ft_putstr_fd(str, STDERR_FILENO);
-	shell->exit_status = EXIT_FAILURE;
-}
-
-void	print_perror(char *str, t_shell *shell)
-{
-	perror(str);
 	shell->exit_status = EXIT_FAILURE;
 }
 
@@ -32,7 +24,7 @@ void	exit_with_status(t_shell *shell, int status)
 	exit(status);
 }
 
-void	print_any(char **cmd, t_shell *shell)
+void	print_any(char **cmd)
 {
 	int		idx;
 	char	*buck;

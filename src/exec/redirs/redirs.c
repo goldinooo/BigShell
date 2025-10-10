@@ -6,18 +6,36 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 21:31:52 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 06:56:33 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:08:30 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
 #include "exec.h"
-#include "lexer.h"
-#include "lib.h"
 #include "parsing.h"
+#include "lib.h"
 #include <errno.h>
-#include <fcntl.h>
-#include <stdbool.h>
+#include <sys/fcntl.h>
+#include <sys/stat.h>
 #include <unistd.h>
+
+static void	print_redir_errs(char *file)
+{
+	struct stat	st;
+	int	ret;
+
+	ret = stat(file, &st);
+	printf("we got here: %d\n", ret);
+	if (!ret)
+	{
+		if (errno == EACCES)
+			ft_putstr_fd("Permission denied!\n", 2);
+		// if (errno == ENOENT)
+	}
+	else
+		ft_putstr_fd("No such file or directory!\n", 2);
+}
 
 bool	redir_in(t_redir *redir)
 {
@@ -28,10 +46,7 @@ bool	redir_in(t_redir *redir)
 		fd = open(redir->file, O_RDONLY);
 		if (fd == -1)
 		{
-			if (errno == EACCES)
-				ft_putstr_fd("Permission denied!\n", 2);
-			if (errno == ENOENT)
-				ft_putstr_fd("No such file or directory!\n", 2);
+			print_redir_errs(redir->file);
 			return (false);
 		}
 		if (dup2(fd, STDIN_FILENO) == -1)
@@ -40,10 +55,10 @@ bool	redir_in(t_redir *redir)
 	}
 	else
 	{
-		fd = dup2(redir->heredoc_fd, STDIN_FILENO);
-		if (fd == -1)
+		if (dup2(redir->heredoc_fd, STDIN_FILENO) == -1)
 			return (false);
-		close(redir->heredoc_fd);
+		if (redir->heredoc_fd != STDIN_FILENO)
+			close(redir->heredoc_fd);
 	}
 	return (true);
 }
@@ -57,9 +72,9 @@ bool	redir_out(t_redir *redir)
 	else
 		fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND);
 	if (fd == -1)
-		return (perror(redir->file), false);
+		return (print_redir_errs(redir->file), false);
 	if (dup2(fd, STDOUT_FILENO) == -1)
-		return (perror(redir->file), close(fd), false);
+		return (print_redir_errs(redir->file), close(fd), false);
 	close(fd);
 	return (true);
 }

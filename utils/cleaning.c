@@ -6,14 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 04:27:27 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 05:10:53 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:16:29 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "lexer.h"
 #include "minishell.h"
-#include "parsing.h"
 
 void	free_tokens(t_token *tokens)
 {

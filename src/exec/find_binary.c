@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 03:18:46 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 06:53:30 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:22:45 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 static char	*crawl_paths(char *paths[], char *bin)
 {
 	struct stat	st;
-	char	*abs_path;
-	char	*tmp;
-	size_t	idx;
+	char		*abs_path;
+	char		*tmp;
+	size_t		idx;
 
 	idx = 0;
 	while (paths[idx])
@@ -47,8 +47,8 @@ static char	*crawl_paths(char *paths[], char *bin)
 char	*get_bin_path(char *bin, t_env *env)
 {
 	struct stat	st;
-	char	**paths;
-	char	*tmp;
+	char		**paths;
+	char		*tmp;
 
 	if (!bin)
 		return (NULL);

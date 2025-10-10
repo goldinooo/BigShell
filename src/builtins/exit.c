@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:54:31 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 02:05:16 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 21:47:27 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exp.h"
-#include "lib.h"
 #include "minishell.h"
-#include <stdlib.h>
 
 static int	is_valid_errno(char *str)
 {

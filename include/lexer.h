@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:52:50 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 04:43:21 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:51:01 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define SQUOTE '\''
-# define DQUOTE '\"'
+# define SQUOTE 39
+# define DQUOTE 34
 
-# define REDIR_IN '<'
-# define REDIR_OUT '>'
-# define PIPE '|'
+# define REDIR_IN 60
+# define REDIR_OUT 62
+# define PIPE 124
 
 typedef enum e_tktype
 {

@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 22:38:08 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/04 23:38:38 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 07:39:04 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ char	**env_to_arr(t_env *env)
 	if (!env)
 		return (NULL);
 	envp = malloc((env_len(env) + 1) * sizeof(char *));
-	if (!envp)
-		return (NULL);
 	idx = 0;
 	curr = env;
 	while (curr)
@@ -53,7 +51,8 @@ char	**env_to_arr(t_env *env)
 		}
 		else
 			envp[idx] = ft_strdup(curr->key);
-		(idx++, curr = curr->next);
+		idx++;
+		curr = curr->next;
 	}
 	return (envp[idx] = NULL, envp);
 }

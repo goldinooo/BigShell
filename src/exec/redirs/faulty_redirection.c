@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 22:03:44 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/10 06:58:33 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:02:32 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ bool	is_faulty_redir(t_redir *redir)
 		{
 			if (is_space(*filename) && *(filename + 1) && !is_space(*(filename
 						+ 1)))
-			{
-				// TODO PRINT THE ERROR MESSAGE FOR faulty filename
 				return (true);
-			}
+			filename++;
 		}
 	}
 	return (false);
