@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "exec.h"
 #include "lexer.h"
 #include "parsing.h"
-#include "exec.h"
-#include <stdbool.h>
-#include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdbool.h>
+#include <unistd.h>
 
 bool	redir_in(t_redir *redir)
 {

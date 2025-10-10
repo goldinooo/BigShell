@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_man2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/10 00:53:53 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 03:09:57 by retahri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib.h"
 
-size_t ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-	size_t idx;
+	size_t	idx;
 
 	idx = 0;
 	while (s[idx])
@@ -29,6 +41,7 @@ static int	ft_check_size(int nb)
 	}
 	return (count);
 }
+
 char	*ft_strdup(const char *s1)
 {
 	char	*ptr;
@@ -46,6 +59,7 @@ char	*ft_strdup(const char *s1)
 	ptr[i] = '\0';
 	return (ptr);
 }
+
 char	*ft_itoa(int n)
 {
 	int		size;

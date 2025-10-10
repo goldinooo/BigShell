@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "exp.h"
 #include "lib.h"
+#include "minishell.h"
 #include <stdbool.h>
 
 bool	should_heredoc_expand(t_redir *redir)
 {
-	if (ft_strchr(redir->file, '"')	|| ft_strchr(redir->file, '\''))
+	if (ft_strchr(redir->file, '"') || ft_strchr(redir->file, '\''))
 		return (redir->shouldexpand = false, false);
 	return (true);
 }
 
 char	*expand_heredoc(t_shell *shell, char *line)
 {
-	int	idx;
+	int		idx;
 	t_exp	exp;
 
 	init_exp(&exp);

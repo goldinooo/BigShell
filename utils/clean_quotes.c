@@ -3,19 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   clean_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 04:57:10 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 21:02:21 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 03:28:20 by retahri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exp.h"
 #include "lexer.h"
-#include "parsing.h"
 #include "lib.h"
+#include "parsing.h"
 #include <stdbool.h>
 #include <stddef.h>
+
+static char *clean_check(char *cleaned)
+{
+	if(!cleaned)
+		return (NULL);
+}
 
 static char	*clean_outer_quotes(char *arg)
 {
@@ -24,10 +30,10 @@ static char	*clean_outer_quotes(char *arg)
 	bool	dquote;
 	char	*cleaned;
 
-	(idx = 0, squote = false, dquote = false);
+	(squote = false, dquote = false);
+	idx = 0;
 	cleaned = ft_strdup("");
-	if (!cleaned)
-		return (NULL);
+	clean_check(cleaned);
 	while (arg[idx])
 	{
 		if (arg[idx] == SQUOTE && !dquote)
@@ -37,8 +43,7 @@ static char	*clean_outer_quotes(char *arg)
 		else
 		{
 			cleaned = app_char(cleaned, arg[idx]);
-			if (!cleaned)
-				return (NULL);
+			clean_check(cleaned);
 		}
 		idx++;
 	}

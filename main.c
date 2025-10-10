@@ -1,22 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/10 00:56:38 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 00:58:19 by retahri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "exec.h"
 #include "exp.h"
 #include "lexer.h"
+#include "lib.h"
 #include "minishell.h"
 #include "parsing.h"
-#include "lib.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "exec.h"
 
 void	process_line(char *line, t_shell *shell)
 {
-    t_token	*tokens;
+	t_token	*tokens;
 
-    lexer(line, &tokens);
-    parser(tokens, shell);
-    free_tokens(tokens);
+	lexer(line, &tokens);
+	parser(tokens, shell);
+	free_tokens(tokens);
 	expand(shell);
 	clean_quotes(shell->cmd);
 	if (!process_heredoc(shell))
@@ -25,11 +37,11 @@ void	process_line(char *line, t_shell *shell)
 		return ;
 	}
 	execute(shell);
-    if (shell->cmd)
-    {
-        lst_clear_cmd(shell->cmd);
-        shell->cmd = NULL;
-    }
+	if (shell->cmd)
+	{
+		lst_clear_cmd(shell->cmd);
+		shell->cmd = NULL;
+	}
 }
 
 char	*generate_prompt(t_shell *shell)
@@ -39,7 +51,7 @@ char	*generate_prompt(t_shell *shell)
 
 void	interactive_mode(t_shell *shell)
 {
-    char	*input;
+	char	*input;
 	char	*prompt;
 
 	init_main_signals();
@@ -60,30 +72,28 @@ void	interactive_mode(t_shell *shell)
 
 void	script_mode(int fd, t_shell *shell)
 {
-    char	*line;
+	char	*line;
 
-    while (true)
-    {
-        line = get_next_line(fd);
-        if (!line)
-            break ;
-        process_line(line, shell);
-        free(line);
-    }
+	while (true)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		process_line(line, shell);
+		free(line);
+	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_shell	shell;
+	t_shell	shell;
 
-    shell.env = init_env();
-    shell.cmd = NULL;
-    shell.exit_status = 0;
-
-    // Check for test mode
-    if (isatty(STDIN_FILENO))
-        interactive_mode(&shell);
-    else
-        script_mode(STDIN_FILENO, &shell);
-    return (0);
+	shell.env = init_env();
+	shell.cmd = NULL;
+	shell.exit_status = 0;
+	if (isatty(STDIN_FILENO))
+		interactive_mode(&shell);
+	else
+		script_mode(STDIN_FILENO, &shell);
+	return (shell.exit_status);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/10 02:08:55 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 02:11:39 by retahri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 #include "exp.h"
 #include "lib.h"
@@ -9,27 +21,22 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-
-
 int	is_builtin(char *cmd)
 {
 	if (!cmd)
 		return (0);
-	if (!ft_strcmp(cmd, "echo")
-		|| !ft_strcmp(cmd, "cd")
-		|| !ft_strcmp(cmd, "pwd")
-		|| !ft_strcmp(cmd, "export")
-		|| !ft_strcmp(cmd, "unset")
-		|| !ft_strcmp(cmd, "env")
-		|| !ft_strcmp(cmd, "exit"))
+	if (!ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "cd") || !ft_strcmp(cmd,
+			"pwd") || !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset")
+		|| !ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "exit"))
 		return (1);
 	else
 		return (0);
 }
+
 void	exec_builtin(t_shell *shell, char **args)
 {
-	int		save_stdout;
-	int		save_stdin;
+	int	save_stdout;
+	int	save_stdin;
 
 	if (!setup_with_backup(shell->cmd, &save_stdout, &save_stdin))
 		return ;
@@ -114,10 +121,10 @@ void	exec_bin(t_shell *shell, t_cmd *cmd)
 	exec_in_child(shell, cmd, bin_path);
 }
 
-void execute(t_shell *shell)
+void	execute(t_shell *shell)
 {
-	t_cmd *tmp;
-	int prev_fd;
+	t_cmd	*tmp;
+	int		prev_fd;
 
 	if (!shell || !shell->cmd)
 		return ;
@@ -126,10 +133,10 @@ void execute(t_shell *shell)
 	if (tmp->next)
 	{
 		ex_pipe(shell, prev_fd, -1);
-		return;
+		return ;
 	}
-	if(!tmp->args || !tmp->args[0] || !tmp->args[0][0])
-		return;
+	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
+		return ;
 	if (is_builtin(tmp->args[0]))
 		exec_builtin(shell, tmp->args);
 	else

@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 07:04:21 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/03 21:25:13 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/10 02:06:55 by retahri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "env.h"
 #include "exec.h"
 #include "exp.h"
+#include "lib.h"
 #include "minishell.h"
 #include "parsing.h"
-#include "lib.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 
 static void	no_arg_msg(t_shell *shell)
 {
-	t_env *curr;
+	t_env	*curr;
 
 	curr = shell->env;
 	while (curr)
@@ -83,7 +82,6 @@ static void	export_var(t_shell *shell, char *var)
 		kv = ft_split(var, '=');
 		if (!kv || !*kv)
 			return ;
-		// if (is_valid_key(valid_expand, kv[0]))
 		if (is_valid_id(kv[0]))
 		{
 			assign_env(shell, kv[0], kv[1]);

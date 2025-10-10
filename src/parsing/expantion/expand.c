@@ -13,17 +13,18 @@
 #include "env.h"
 #include "exp.h"
 #include "lexer.h"
+#include "lib.h"
 #include "minishell.h"
 #include "parsing.h"
-#include "lib.h"
 #include <stdlib.h>
 
-int expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
+int	expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 {
-	char *exit_status;
-	char *tmp;
+	char	*exit_status;
+	char	*tmp;
+
 	exp->start_pos = ++i;
-	if(value[i] == '?')
+	if (value[i] == '?')
 	{
 		exit_status = ft_itoa(shell->exit_status);
 		exp->output = ft_strjoin(exp->output, exit_status);
@@ -31,11 +32,11 @@ int expander_magic(t_exp *exp, char *value, int i, t_shell *shell)
 	}
 	else
 	{
-		while(ft_isalnum(value[i]) || value[i] == '_')
+		while (ft_isalnum(value[i]) || value[i] == '_')
 			i++;
 		exp->var = ft_substr(value, exp->start_pos, i - exp->start_pos);
 		exp->var = value_from_env(exp->var, shell->env);
-		if(exp->var)
+		if (exp->var)
 		{
 			tmp = exp->output;
 			exp->output = ft_strjoin(exp->output, exp->var);
@@ -59,15 +60,14 @@ int	skip_and_join(t_exp *exp, char *value, int idx)
 	return (idx);
 }
 
-
-char *expand_var(t_shell *shell, char *value)
+char	*expand_var(t_shell *shell, char *value)
 {
 	t_exp	exp;
-	int 	idx;
+	int		idx;
 
 	idx = 0;
 	init_exp(&exp);
-	while(value[idx])
+	while (value[idx])
 	{
 		if (value[idx] == SQUOTE && !exp.is_dquote)
 			handle_quotes(&exp, value[idx], true);
@@ -85,9 +85,9 @@ char *expand_var(t_shell *shell, char *value)
 
 void	exp_redir(t_redir *red, t_shell *shell)
 {
-	while(red)
+	while (red)
 	{
-		if(red->type != TK_HEREDOC)
+		if (red->type != TK_HEREDOC)
 			red->file = expand_var(shell, red->file);
 		else if (red->type == TK_HEREDOC)
 			should_heredoc_expand(red);
@@ -99,7 +99,7 @@ void	expand(t_shell *shell)
 {
 	t_cmd	*ptr;
 	char	*value;
-	int 	 idx;
+	int		idx;
 
 	ptr = shell->cmd;
 	while (ptr)

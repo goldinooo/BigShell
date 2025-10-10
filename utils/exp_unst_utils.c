@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_signals.c                                  :+:      :+:    :+:   */
+/*   exp_unst_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 00:55:57 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 02:59:21 by retahri          ###   ########.fr       */
+/*   Created: 2025/10/10 00:56:18 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 03:03:46 by retahri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lib.h"
 #include "minishell.h"
 
-static void	sig_handler(int signum)
+int	is_valid_id(char *str)
 {
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	exit(signum + EXIT_SIG);
-}
+	int	idx;
 
-void	init_heredoc_signals(void)
-{
-	struct sigaction	sa;
-
-	sa.sa_handler = sig_handler;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &sa, NULL);
-	sa.sa_handler = SIG_IGN;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGQUIT, &sa, NULL);
+	if (!str || !*str)
+		return (0);
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (0);
+	idx = 1;
+	while (str[idx])
+	{
+		if (!ft_isalnum(str[idx]) && str[idx] != '_')
+			return (0);
+		idx++;
+	}
+	return (1);
 }
