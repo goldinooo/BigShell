@@ -6,7 +6,7 @@
 /*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:53:53 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 03:09:57 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/10 05:12:06 by retahri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	ft_strlen(const char *s)
 {
 	size_t	idx;
-
+	
 	idx = 0;
 	while (s[idx])
 		idx++;

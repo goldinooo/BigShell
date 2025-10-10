@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/10 04:57:44 by retahri           #+#    #+#             */
+/*   Updated: 2025/10/10 05:06:40 by retahri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "env.h"
 #include "exp.h"
 #include "lib.h"
@@ -25,6 +37,4 @@ void	ex_cd(t_shell *shell, char **args)
 	}
 	if (chdir(args[1]) != 0)
 		print_any(args, shell);
-		// print_perror ("cd makhadamachi wla chi 9alwaaaaaaaaaa", shell);
-
 }
