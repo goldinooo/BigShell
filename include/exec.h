@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:52:41 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 07:10:39 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 03:20:16 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ char		*get_bin_path(char *bin, t_env *env);
 */
 bool		init_redirection(t_cmd *cmd);
 
-void		child_proc(t_shell *shell, int status, t_cmd *cmd, char *bp);
+void		child_proc(t_shell *shell, t_cmd *cmd, char *bp);
 
 #endif

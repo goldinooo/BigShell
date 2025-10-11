@@ -6,10 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:21:59 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/08 04:00:51 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 04:52:27 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lexer.h"
 #include "minishell.h"
 
 char	**fill_cmds(t_token *tokens, size_t cmds)
@@ -52,6 +53,11 @@ t_redir	*fill_redirs(t_token *tokens, size_t redirs)
 	curr = tokens;
 	while (curr && redirs > 0)
 	{
+		if (curr->type == TK_WORD)
+		{
+			curr = curr->next;
+			continue ;
+		}
 		value = ft_strdup(curr->next->value);
 		if (!value)
 			return (lst_clear_redirs(redir), NULL);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:52:24 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 00:52:27 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/11 00:57:24 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-# include "stdlib.h"
+# include <stdlib.h>
 
 # define KEY_PATH "PATH"
 # define BIN_PATH "/bin:/usr/bin"
