@@ -6,22 +6,11 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 02:08:55 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 07:22:21 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 03:20:37 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "exp.h"
-#include "lib.h"
 #include "minishell.h"
-#include "parsing.h"
-#include <errno.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/unistd.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 int	is_builtin(char *cmd)
 {
@@ -88,7 +77,7 @@ void	exec_in_child(t_shell *shell, t_cmd *cmd, char *bin_path)
 		reset_and_catch_sig(shell, status, false);
 	}
 	else
-		child_proc(shell, status, cmd, bin_path);
+		child_proc(shell, cmd, bin_path);
 }
 
 void	exec_bin(t_shell *shell, t_cmd *cmd)

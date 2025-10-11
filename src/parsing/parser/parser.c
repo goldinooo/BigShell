@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:10:47 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/08 03:59:45 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 04:50:45 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,15 @@ static t_token	*parse_cmds(t_shell *shell, t_token *token)
 	size_t	redirs;
 	size_t	cmds;
 	t_cmd	*node;
+	t_token	*start_token;
 
+	start_token = token;
 	count_cmds_and_redirs(token, &cmds, &redirs);
 	node = lst_new_cmd(fill_cmds(token, cmds));
 	if (!node)
 		return (NULL);
 	token = skip_cmds(token, cmds);
-	node->redir = fill_redirs(token, redirs);
+	node->redir = fill_redirs(start_token, redirs);
 	if (!node->redir && redirs > 0)
 		return (clr_char_array(node->args), free(node), NULL);
 	token = skip_redirs(token, redirs);
