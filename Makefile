@@ -6,11 +6,12 @@ CC= cc
 CFLAGS= -Wall -Wextra -fsanitize=address -ggdb3
 BUILD_FLAGS= -lreadline -L/Users/abraimi/homebrew/opt/readline/lib
 
+CWD=.
+BUILD_DIR= build
+
 INCLUDES= -I./include -I/Users/abraimi/homebrew/opt/readline/include
 HEADERS= $(shell find $(CWD) -type f -name "*.h")
 
-CWD=.
-BUILD_DIR= build
 
 SRCS= $(shell find $(CWD) -type f -name "*.c")
 OBJS= $(addprefix $(BUILD_DIR)/, $(SRCS:$(CWD)/%.c=%.o))

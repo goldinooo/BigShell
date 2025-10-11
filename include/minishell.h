@@ -27,6 +27,8 @@
 # include <string.h>
 # include <unistd.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
+
 # define EXIT_SIGNAL 128
 # define SIG_KILLED 130
 # define EXIT_SYNTAX 2

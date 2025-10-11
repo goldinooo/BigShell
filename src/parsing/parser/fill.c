@@ -6,11 +6,10 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 20:21:59 by abraimi           #+#    #+#             */
-/*   Updated: 2025/10/11 04:52:27 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 06:30:29 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
 #include "minishell.h"
 
 char	**fill_cmds(t_token *tokens, size_t cmds)

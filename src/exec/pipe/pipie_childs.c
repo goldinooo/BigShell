@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipie_childs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: retahri <retahri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 00:55:12 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/10 02:12:43 by retahri          ###   ########.fr       */
+/*   Updated: 2025/10/11 23:01:27 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	ex_external_child(t_env **env, t_cmd *cmd)
 	env_p = env_to_arr(*env);
 	execve(cmd_p, cmd->args, env_p);
 	perror("execve");
+	clr_char_array(env_p);
+	free(cmd_p);
 	exit(127);
 }
 
@@ -43,6 +45,8 @@ void	ex_child(t_shell *shell, t_cmd *cmd, int prev_fd, int pipedes[2])
 	setup_io(cmd, prev_fd, pipedes);
 	if (!init_redirection(cmd))
 		exit(EXIT_FAILURE);
+	if (!cmd->args || !cmd->args[0])
+		exit(EXIT_SUCCESS);
 	if (is_builtin(cmd->args[0]))
 		exec_builtin(shell, cmd->args);
 	else
