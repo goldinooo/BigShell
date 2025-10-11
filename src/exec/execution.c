@@ -6,7 +6,7 @@
 /*   By: abraimi <abraimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 02:08:55 by retahri           #+#    #+#             */
-/*   Updated: 2025/10/11 06:29:12 by abraimi          ###   ########.fr       */
+/*   Updated: 2025/10/11 23:00:24 by abraimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ void	exec_bin(t_shell *shell, t_cmd *cmd)
 		if (stat(cmd->args[0], &st) == -1)
 		{
 			if (ft_strchr(cmd->args[0], '/'))
-				bprint_err((char *[]){cmd->args[0], NULL},
-					"is a directory");
+				bprint_err((char *[]){cmd->args[0], NULL}, "is a directory");
 			else
 			{
 				shell->exit_status = EXIT_CMD_NF;
@@ -107,7 +106,7 @@ void	exec_bin(t_shell *shell, t_cmd *cmd)
 			bprint_err((char *[]){cmd->args[0], NULL}, "Permission denied");
 		return ;
 	}
-	exec_in_child(shell, cmd, bin_path);
+	(exec_in_child(shell, cmd, bin_path), free(bin_path));
 }
 
 void	execute(t_shell *shell)
